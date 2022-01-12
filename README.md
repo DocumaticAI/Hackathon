@@ -1,11 +1,13 @@
 # Documatic presents to you our 2nd hackathon!!
 
 ### Table Of Content 📃
--
--
--
--
--
+
+- [What's a hackathon?](https://github.com/DocumaticAI/Hackathon#whats-a-hackathon--)
+- [How to participate](https://github.com/DocumaticAI/Hackathon#cool-how-do-i-participate-)
+- [Topic](https://github.com/DocumaticAI/Hackathon#whats-the-topic-)
+- [Rules](https://github.com/DocumaticAI/Hackathon#rules-)
+- [Criteria of Judgement](https://github.com/DocumaticAI/Hackathon#criteria-of-judgement-)
+- [Prizes](https://github.com/DocumaticAI/Hackathon#prizes-)
 
 <br>
 
