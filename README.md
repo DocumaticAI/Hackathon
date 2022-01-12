@@ -8,7 +8,7 @@
 - [Rules](https://github.com/DocumaticAI/Hackathon#rules-)
 - [Criteria of Judgement](https://github.com/DocumaticAI/Hackathon#criteria-of-judgement-)
 - [Prizes](https://github.com/DocumaticAI/Hackathon#prizes-)
-- [Support/dispute/inquiry]()
+- [Support/dispute/inquiry](https://github.com/DocumaticAI/Hackathon/blob/master/README.md#support--dispute--inquiry-)
 <br>
 
 ## What's a hackathon?  <img src = "https://cdn.discordapp.com/emojis/794889013138948126.webp?size=128&quality=lossless" alt = "hmmm" width=40>
