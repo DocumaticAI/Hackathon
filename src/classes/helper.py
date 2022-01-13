@@ -1,29 +1,31 @@
-from os import path as os_path
-from os import mkdir, remove
+from os.path import join, dirname, abspath, exists, isfile
+from os import mkdir, remove, listdir
 from tkinter import messagebox
 from __main__ import __file__ as main_file
 
 class Helper:
     @staticmethod
     def get_notepads_directory():
-        return os_path.join(os_path.dirname(os_path.abspath(main_file)), "notepads")
+        path = join(dirname(abspath(main_file)), "notepads")
+
+        if not exists(path):
+            mkdir(path)
+
+        return path
 
     @staticmethod
     def get_notepad_path(name: str):
-        return os_path.join(Helper.get_notepads_directory(), name)
+        return join(Helper.get_notepads_directory(), name)
 
     @staticmethod
     def add_notepad(name: str, file_path: str = None) -> bool:
         directory = Helper.get_notepads_directory()
-        if not os_path.exists(directory):
-            mkdir(directory)
-
-        path = os_path.join(directory, name) + ".txt"
+        path = join(directory, name) + ".txt"
 
         if file_path:
             path = file_path
 
-        if os_path.exists(path):
+        if exists(path):
             return False
 
         with open(path, "w"):
@@ -34,15 +36,12 @@ class Helper:
     @staticmethod
     def delete_notepad(name: str, file_path: str = None) -> bool:
         directory = Helper.get_notepads_directory()
-        if not os_path.exists(directory):
-            mkdir(directory)
-
-        path = os_path.join(directory, name)
+        path = join(directory, name)
 
         if file_path:
             path = file_path
 
-        if not os_path.exists(path):
+        if not exists(path):
             return False
 
         remove(path)
@@ -50,8 +49,10 @@ class Helper:
         return True
 
     @staticmethod
-    def get_notepads(path: str = None):
-        pass
+    def get_notepads() -> list[str]:
+        directory = Helper.get_notepads_directory()
+
+        return [f for f in listdir(directory) if isfile(join(directory, f))]
 
     @staticmethod
     def show_error(error_message: str):
