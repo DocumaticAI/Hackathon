@@ -1,5 +1,6 @@
 from tkinter import Tk
 from classes.master import Master
+from classes.password import Password
 
 def main():
     window = Tk()
@@ -8,6 +9,7 @@ def main():
     window.geometry("400x400")
     window.eval("tk::PlaceWindow %s center" % window.winfo_toplevel())
 
+    Password(window)
     Master(window)
 
     window.mainloop()
