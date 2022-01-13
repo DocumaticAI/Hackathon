@@ -22,7 +22,6 @@ module.exports = {
         )
     ),
   async execute(interaction) {
-    await interaction.deferReply();
     const choice = interaction.options.getString("type");
     if (choice === "gen") {
       const start = interaction.options.getString("start");

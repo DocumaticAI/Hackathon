@@ -30,28 +30,6 @@ for (const file of slashcommandFiles) {
   const command = require(`./commands/slash/${file}`);
   client.slash_commands.set(command.data.name, command);
 }
-
-client.once("ready", () => {
-  console.log("Ready!");
-});
-
-client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isCommand()) return;
-
-  const command = client.slash_commands.get(interaction.commandName);
-
-  if (!command) return;
-
-  try {
-    await command.execute(interaction);
-  } catch (error) {
-    console.error(error);
-    return interaction.reply({
-      content: "There was an error while executing this command!",
-      ephemeral: true,
-    });
-  }
-});
 /** Registering/Replying to Slash Commands -- End */
 
 /** Registering Events -- Start */
