@@ -1,5 +1,4 @@
 module.exports = (client, message) => {
-
   // Delcare Prefix
   const prefix = process.env.PREFIX;
 
