@@ -1,5 +1,5 @@
 from classes.helper import Helper
-from os.path import join, exists
+from os.path import join, exists, getsize
 from tkinter import Toplevel, Tk, StringVar
 from tkinter.ttk import Entry, Button, Label
 
@@ -63,6 +63,7 @@ class Password:
             self.entry.delete(0, "end")
             self.entry.focus_set()
             Helper.show_error("Wrong password!")
+
             self.entry.focus_set()
 
             self.tries += 1
@@ -78,35 +79,16 @@ class Password:
         file = join(directory, "__password__.txt")
 
         if exists(file):
-            with open(file, "r") as f:
-                return f.read()
-
+            with open(file, "r") as pass_file:
+                if getsize(file) == 0:
+                    return self.enter_pass()
+                else:
+                    return pass_file.read()
         else:
-            self.top.withdraw()
-
-            top = Toplevel(self.top)
-
-            self.root.eval("tk::PlaceWindow %s center" % top)
-
-            top.title("Set Password")
-            top_label = Label(top, text="You seem new! Type here the password you want to use for your notepad.")
-            top_label.pack()
-
-            var = StringVar()
-
-            top_entry = Entry(top, show="*", textvariable=var)
-            top_entry.pack()
-
-            def call_back():
-                self.set_pass(top_entry.get(), top)
-                self.top.deiconify()
-
-            Button(top, text="Confirm", command=call_back).pack()
-
-            return var
+            return self.enter_pass()
 
     @staticmethod
-    def set_pass(password, top: Toplevel):
+    def set_pass(password: str, top: Toplevel):
         directory = Helper.get_notepads_directory()
 
         file = join(directory, "__password__.txt")
@@ -115,3 +97,27 @@ class Password:
             f.write(encrypt(password))
 
         top.destroy()
+
+    def enter_pass(self):
+        self.top.withdraw()
+
+        top = Toplevel(self.top)
+
+        self.root.eval("tk::PlaceWindow %s center" % top)
+
+        top.title("Set Password")
+        top_label = Label(top, text="You seem new! Type here the password you want to use for your notepad.")
+        top_label.pack()
+
+        var = StringVar()
+
+        top_entry = Entry(top, show="*", textvariable=var)
+        top_entry.pack()
+
+        def call_back():
+            self.set_pass(top_entry.get(), top)
+            self.top.deiconify()
+
+        Button(top, text="Confirm", command=call_back).pack()
+
+        return var
