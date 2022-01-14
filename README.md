@@ -22,7 +22,7 @@ We'll give you a topic and you have to create projects on it, The best ones will
 
 Steps on how to participate:
 
-- Join our [community server](https://discord.gg/BcbY3GXtUZ) and provide the following details in team-details channel: language in use, real name, email, github username, teammates
+- Join our [community server](https://discord.gg/BcbY3GXtUZ) and provide the following details in team-details channel: language in use, real/discord name, email, github username, teammates
 - Fork this repository
 - create your project on your fork inside the [src folder](https://github.com/DocumaticAI/Hackathon/tree/master/src)
 - create a pull request with the [template](https://github.com/DocumaticAI/Hackathon/blob/master/.github/pull_request_template.md)
@@ -42,7 +42,7 @@ there isnt one! Go crazy!! make anything you want, just make it unique. ***The p
 - All teams should be registered in our discord server. Provide the following details in team-details channel: language in use, real name, email, github username, teammates
 - Python projects are required to use Documatic tool to document their code. [How to use Documatic Tool](https://github.com/DocumaticAI/Hackathon/blob/master/examples/technical-docs.md)
 - All projects are required to use doculog tool to document their commits. [How to use Doculog](https://github.com/DocumaticAI/Hackathon/blob/master/examples/doculog.md)
-- All projects are supposed to be submitted by 26th January, 00:00 EST time.
+- All projects are supposed to be submitted by 18th January, 00:00 EST time.
 - No copying someone else's code, we can check the time on each fork's commit history to determine who copied and will be disqualified.
 
 <br>
