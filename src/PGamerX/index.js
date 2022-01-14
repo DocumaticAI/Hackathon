@@ -6,8 +6,8 @@ require("dotenv").config();
 const deepai = require('deepai');
 deepai.setApiKey(process.env.DEEPAIKEY);
 
-const token = process.env.BOT_TOKEN;
 
+const token = process.env.BOT_TOKEN;
 let client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
   partials: ['MESSAGE', 'CHANNEL', 'REACTION']
