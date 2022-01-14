@@ -1,0 +1,18 @@
+{
+	"name": "hackathon",
+	"version": "1.0.0",
+	"main": "src/Main.js",
+	"scripts": {
+		"watch": "tsc -w",
+		"dev": "nodemon --watch dist",
+		"run": "node ."
+	},
+	"repository": "https://github.com/Jakob5358/Hackathon.git",
+	"author": "Jakob & Mono",
+	"license": "MIT",
+	"dependencies": {
+		"consola": "^2.15.3",
+		"discord.js": "^13.5.1",
+		"glob": "^7.2.0"
+	}
+}
