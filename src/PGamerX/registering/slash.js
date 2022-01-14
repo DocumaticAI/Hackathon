@@ -5,6 +5,7 @@ require('dotenv').config()
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const CLIENT_ID = process.env.BOT_CLIENT_ID;
+const GUILD_ID = process.env.GUILD_ID;
 
 const commands = [];
 const commandFiles = readdirSync("./commands/slash/")
@@ -18,6 +19,6 @@ for (const file of commandFiles) {
 const rest = new REST({ version: "9" }).setToken(BOT_TOKEN);
 
 rest
-  .put(Routes.applicationCommands(CLIENT_ID), { body: commands })
+  .put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), { body: commands })
   .then(() => console.log(`Successfully registered application commands. ${commands.length} commands registered.`))
   .catch(console.error);

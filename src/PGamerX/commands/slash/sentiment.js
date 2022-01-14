@@ -31,7 +31,6 @@ module.exports = {
       }
     );
 
-    console.log(result);
     const neutral =
       "http://cdn.shopify.com/s/files/1/1061/1924/products/Neutral_Face_Emoji_grande.png?v=1571606037";
     const positive =

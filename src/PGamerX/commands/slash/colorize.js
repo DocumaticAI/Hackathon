@@ -34,7 +34,6 @@ module.exports = {
           image: attachment_url,
         }
       );
-      console.log(resp["output_url"]);
       const embed = new MessageEmbed()
         .setTitle("Colored Image")
         .setImage(resp["output_url"])
