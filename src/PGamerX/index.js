@@ -6,16 +6,13 @@ require("dotenv").config();
 const deepai = require('deepai');
 deepai.setApiKey(process.env.DEEPAIKEY);
 
-const PasteClient = require("pastebin-api").default;
-const paste = new PasteClient("DEV_API_KEY");
-
 const token = process.env.BOT_TOKEN;
 
 let client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
 
-client.pastebin = paste;
 client.db = db;
 client.deepai = deepai;
 
@@ -42,17 +39,5 @@ for (const file of events) {
   client.on(eventName, event.bind(null, client));
 }
 /** Registering Events -- End */
-
-/** Registering Message Commands -- Start */
-client.message_commands = new Collection();
-const msg_commandFiles = fs
-  .readdirSync("./commands/message")
-  .filter((file) => file.endsWith(".js"));
-
-for (const file of msg_commandFiles) {
-  const command = require(`./commands/message/${file}`);
-  client.message_commands.set(command.name, command);
-}
-/** Registering Message Commands -- End */
 
 client.login(token);
