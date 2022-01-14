@@ -1,0 +1,26 @@
+{
+    "version": "0.0.1",
+    "scripts": {
+      "dev": "vite",
+      "build": "vue-tsc --noEmit && vite build",
+      "serve": "vite preview"
+    },
+    "author": "ApiDev234<apidev234@yandex.com>",
+    "license": "Creative Commons v1.0",
+    "dependencies": {
+      "@vueuse/core": "^6.5.3",
+      "monaco-editor": "^0.25.2",
+      "split.js": "^1.6.4",
+      "vue": "^3.2.19"
+    },
+    "devDependencies": {
+      "@vitejs/plugin-vue": "^1.9.2",
+      "@vue/compiler-sfc": "^3.2.19",
+      "autoprefixer": "^10.2.6",
+      "postcss": "^8.3.5",
+      "tailwindcss": "^2.2.4",
+      "typescript": "^4.3.2",
+      "vite": "^2.5.10",
+      "vue-tsc": "^0.3.0"
+    }
+  }
