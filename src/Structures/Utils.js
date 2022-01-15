@@ -12,5 +12,6 @@ module.exports = {
   },
   search: promisify(glob),
   sleep: promisify(setTimeout),
-  pretty: str => str[0].toUpperCase() + str.slice(1).toLowerCase()
+  pretty: str => str[0].toUpperCase() + str.slice(1).toLowerCase(),
+  plural: num => (num === 1 ? '' : 's')
 };
