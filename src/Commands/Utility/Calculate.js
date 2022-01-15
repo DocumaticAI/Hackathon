@@ -12,14 +12,18 @@ module.exports = {
 			type: 'STRING',
 		},
 	],
+	category: 'Utility',
 	async run({ interaction }) {
 		const equation = interaction.options.getString('equation', true);
-    const embed = new MessageEmbed()
+		const embed = new MessageEmbed();
 		try {
-      embed.setColor('BLURPLE').addFields([{ name: 'Your Equation', value: equation }, { name: 'Solution', value: String(math.evaluate(equation)) }])
+			embed.setColor('BLURPLE').addFields([
+				{ name: 'Your Equation', value: equation },
+				{ name: 'Solution', value: String(math.evaluate(equation)) },
+			]);
 		} catch (err) {
-      embed.setColor('RED').setDescription('Invalid equation')
+			embed.setColor('RED').setDescription('Invalid equation');
 		}
-    await interaction.reply({ embeds: [embed] });
+		await interaction.reply({ embeds: [embed] });
 	},
 };

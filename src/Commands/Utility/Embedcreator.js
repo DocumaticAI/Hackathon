@@ -10,6 +10,7 @@ const Schema = require('../../Models/Embed');
 module.exports = {
 	name: 'embedcreator',
 	description: 'Create and post embeds',
+	category: 'Utility',
 	async run({ interaction, bot }) {
 		if (!interaction.member.permissions.has('MANAGE_MESSAGES'))
 			return interaction.editReply(

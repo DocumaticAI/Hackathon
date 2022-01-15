@@ -10,6 +10,8 @@ module.exports = {
 		try {
 			await command.run({ interaction, bot, options: interaction.options });
 		} catch (err) {
+			console.log(err);
+
 			await interaction[
 				interaction.deferred
 					? 'editReply'
@@ -18,7 +20,9 @@ module.exports = {
 					: 'reply'
 			]({
 				embeds: [
-					new MessageEmbed().setColor('RED').setDescription(err.message),
+					new MessageEmbed()
+						.setColor('RED')
+						.setDescription(err.message || 'Unexpected error'),
 				],
 			});
 		}
