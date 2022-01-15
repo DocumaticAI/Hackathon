@@ -10,42 +10,9 @@ module.exports = {
 			type: 'USER',
 		},
 	],
-	category: 'Utility',
 	async run({ interaction, bot }) {
 		const user = interaction.options.getMember('user') || interaction.member;
 		await user.user.fetch(true);
-		var flags = {
-			'': 'None',
-			DISCORD_EMPLOYEE: 'Discord Employee',
-			DISCORD_PARTNER: 'Discord Partner',
-			BUGHUNTER_LEVEL_1: 'Bug Hunter ( Level 1 )',
-			BUGHUNTER_LEVEL_2: 'Bug Hunter ( Level 2 )',
-			HYPESQUAD_EVENTS: 'Hypesquad Events',
-			HOUSE_BRILLIANCE: `HypeSquad Brilliance`,
-			HOUSE_BRAVERY: `HypeSquad Bravery`,
-			HOUSE_BALANCE: `HypeSquad Balance`,
-			EARLY_SUPPORTER: 'Early Supporter',
-			TEAM_USER: 'Team User',
-			VERIFIED_BOT: 'Verified Bot',
-			VERIFIED_DEVELOPER: 'Verified Bot Developer',
-			DISCORD_NITRO: 'Discord Nitro',
-		};
-		const Flags = flags[user.user.flags.toArray().join(', ')];
-		if (user.avatar && user.avatar.startsWith('a_'))
-			Flags.push(Badges['DISCORD_NITRO']);
-		let status;
-		switch (user.presence?.status) {
-			case 'online':
-				status = 'Online';
-				break;
-			case 'dnd':
-				status: 'Do not disturb';
-				break;
-			case 'idle':
-				status = 'Idle';
-				break;
-		}
-		if (!status) status = 'Invisible';
 		await interaction.reply({
 			embeds: [
 				new MessageEmbed()
@@ -65,9 +32,8 @@ module.exports = {
 						`<t:${Math.round(user.user.createdTimestamp / 1000)}:f>`,
 						false
 					)
-					.addField('Badges', `${Flags}`, false)
 					.setFooter({
-						text: `User ID: ${user.id} | Presence: ${status}`,
+						text: `User ID: ${user.id}`,
 					}),
 			],
 		});

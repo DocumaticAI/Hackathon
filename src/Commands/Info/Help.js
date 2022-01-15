@@ -5,9 +5,8 @@ const {
 } = require('discord.js');
 
 module.exports = {
-	name: 'help',
+	commandName: 'help',
 	description: 'Get some help!',
-	category: 'Info',
 	async run({ interaction, bot }) {
 		const set = new Set();
 		bot.commands.forEach((cmd) => set.add(cmd.category));
@@ -15,35 +14,27 @@ module.exports = {
 
 		const home = {
 			embeds: [
-				new MessageEmbed()
-					.setDescription(
-						categories
-							.map(
-								(category) =>
-									`**${category}**\n${bot.commands
-										.filter((cmd) => cmd.category === category)
-										.map((cmd) => `\`${cmd.name}\``)
-										.join(', ')}`
-							)
-							.join('\n')
+				new MessageEmbed().setDescription(
+					categories.map(
+						(category) =>
+							`**${category}**\n${bot.commands
+								.filter((cmd) => cmd.category === category)
+								.map((cmd) => `\`${cmd.commandName}\``)
+								.join(', ')}`
 					)
-					.setColor('BLURPLE'),
+				),
 			],
 			components: [
 				new MessageActionRow().addComponents(
-					new MessageSelectMenu()
-						.setPlaceholder('Help Select Menu')
-						.setCustomId('Help-Select-Menu')
-						.addOptions(
-							categories.map((category) => {
-								return {
-									label: category,
-									value: category,
-									description: `The ${category} commands.`,
-									emoji: '📜',
-								};
-							})
-						)
+					new MessageSelectMenu().addOptions([
+						categories.map((category) => {
+							return {
+								label: category,
+								value: category,
+								emoji: '📜',
+							};
+						}),
+					])
 				),
 			],
 		};
@@ -78,27 +69,21 @@ module.exports = {
 			if (val === 'home') return await i.update(home);
 			if (categories.includes(val))
 				return await i.update({
-					embeds: [
-						new MessageEmbed().setDescription('ooga booga').setColor('BLURPLE'),
-					],
+					embeds: [],
 					components: [
 						new MessageActionRow().addComponents(
-							new MessageSelectMenu()
-								.setPlaceholder('Commands and Help Select Menu')
-								.setCustomId('Commands-and-help-select-menu')
-								.addOptions(
-									bot.commands
-										.filter((cmd) => cmd.category === val)
-										.map((cmd) => {
-											return {
-												label: cmd.name,
-												value: cmd.name,
-												description: cmd.description,
-												emoji: '🔧',
-											};
-										})
-										.push(homeButton)
-								)
+							new MessageSelectMenu().addOptions([
+								...bot.commands
+									.filter((cmd) => cmd.category === val)
+									.map((cmd) => {
+										return {
+											name: cmd.name,
+											description: cmd.description,
+											emoji: '🔧',
+										};
+									}),
+								home,
+							])
 						),
 					],
 				});
@@ -106,40 +91,30 @@ module.exports = {
 
 			await i.update({
 				embeds: [
-					new MessageEmbed()
-						.setDescription(
-							`
+					new MessageEmbed().setDescription(`
 **Name:** ${cmd.name}
 **Category:** ${cmd.category}
 **Syntax:** \`/${cmd.name}${
-								cmd.options
-									? ` ${cmd.options
-											.map((option) =>
-												option.required
-													? `<${option.name}>`
-													: `[${option.name}]`
-											)
-											.join(' ')}`
-									: ''
-							}\`
-        `
-						)
-						.setColor('BLURPLE'),
+						cmd.options
+							? ` ${cmd.options
+									.map((option) =>
+										option.required ? `<${option.name}>` : `[${option.name}]`
+									)
+									.join(' ')}`
+							: ''
+					}\`
+        `),
 				],
 				components: [
 					new MessageActionRow().addComponents(
-						new MessageSelectMenu()
-							.setPlaceholder('Category and Help Select Menu')
-							.setCustomId('Category-and-help-command-menu')
-							.addOptions([
-								homeButton,
-								{
-									label: cmd.category,
-									value: cmd.category,
-									description: `The ${cmd.category} commands`,
-									emoji: '📜',
-								},
-							])
+						new MessageSelectMenu().addOptions([
+							home,
+							{
+								name: cmd.category,
+								description: `The ${cmd.category} commands`,
+								emoji: '📜',
+							},
+						])
 					),
 				],
 			});
