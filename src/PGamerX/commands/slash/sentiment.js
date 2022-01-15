@@ -41,9 +41,10 @@ module.exports = {
     let img;
     let color;
 
+    console.log(result)
     if (result["output"].toString().toLowerCase() == "neutral") {
       img = neutral;
-      color = "GRAY";
+      color = "WHITE";
     } else if (
       result["output"].toString().toLowerCase() == "negative" ||
       result["output"].toString().toLowerCase() == "verynegative"
