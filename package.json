@@ -12,7 +12,10 @@
 	"license": "MIT",
 	"dependencies": {
 		"consola": "^2.15.3",
-		"discord.js": "^13.5.1",
-		"glob": "^7.2.0"
+		"discord.js": "^13.6.0",
+		"dotenv": "^11.0.0",
+		"glob": "^7.2.0",
+		"mathjs": "^10.0.2",
+		"mongoose": "^6.1.6"
 	}
 }
