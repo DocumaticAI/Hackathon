@@ -2,7 +2,7 @@ const { promisify } = require('util');
 const glob = require('glob');
 
 module.exports = {
-  getRandomString: function (length) {
+  getRandomString: length => {
     const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let result = '';
     for (let i = 0; i < length; i++) {
