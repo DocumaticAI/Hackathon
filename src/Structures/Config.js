@@ -2,5 +2,5 @@ module.exports = {
   botOptions: {
     intents: ['GUILDS', 'GUILD_MESSAGES']
   },
-  guildId: ''
+  guildId: '930894483355217950'
 };
