@@ -11,5 +11,6 @@ module.exports = {
     return result;
   },
   search: promisify(glob),
-  sleep: promisify(setTimeout)
+  sleep: promisify(setTimeout),
+  pretty: str => str[0].toUpperCase() + str.slice(1).toLowerCase()
 };
