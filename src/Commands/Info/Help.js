@@ -77,7 +77,7 @@ module.exports = {
 									.filter((cmd) => cmd.category === val)
 									.map((cmd) => {
 										return {
-											name: cmd.commandName,
+											name: cmd.name,
 											description: cmd.description,
 											emoji: '🔧',
 										};
@@ -92,9 +92,9 @@ module.exports = {
 			await i.update({
 				embeds: [
 					new MessageEmbed().setDescription(`
-**Name:** ${cmd.commandName}
+**Name:** ${cmd.name}
 **Category:** ${cmd.category}
-**Syntax:** \`/${cmd.commandName}${
+**Syntax:** \`/${cmd.name}${
 						cmd.options
 							? ` ${cmd.options
 									.map((option) =>

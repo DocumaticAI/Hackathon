@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 module.exports = {
-	commandName: 'serverinfo',
+	name: 'serverinfo',
 	description: 'Displays various information about server',
 	async run({ interaction, bot }) {
 		await interaction.reply({

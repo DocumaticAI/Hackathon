@@ -7,10 +7,8 @@ const {
 const { getRandomString } = require('../../Structures/Utils');
 const Schema = require('../../Models/Embed');
 
-//@ts-check
-
 module.exports = {
-	commandName: 'embedcreator',
+	name: 'embedcreator',
 	description: 'Create and post embeds',
 	async run({ interaction, bot }) {
 		if (!interaction.member.permissions.has('MANAGE_MESSAGES'))

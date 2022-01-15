@@ -1,7 +1,8 @@
 const { MessageEmbed } = require('discord.js');
 const math = require('mathjs');
+
 module.exports = {
-	commandName: 'calculate',
+	name: 'calculate',
 	description: 'Calculate and solve equations',
 	options: [
 		{
@@ -11,21 +12,14 @@ module.exports = {
 			type: 'STRING',
 		},
 	],
-	async run({ interaction, bot }) {
-		const equation = interaction.options.getString('equations');
+	async run({ interaction }) {
+		const equation = interaction.options.getString('equation', true);
+    const embed = new MessageEmbed()
 		try {
-			let result = match.evaluate(equation);
+      embed.setColor('BLURPLE').addFields([{ name: 'Your Equation', value: equation }, { name: 'Solution', value: String(math.evaluate(equation)) }])
 		} catch (err) {
-			await interaction.reply('Invalid Equation');
+      embed.setColor('RED').setDescription('Invalid equation')
 		}
-
-		await interaction.reply({
-			embeds: [
-				new MessageEmbed()
-					.setColor('BLURPLE')
-					.addField('Your Equation', ${equation}`
-					.addField('Solution', result,,
-			],
-		});
+    await interaction.reply({ embeds: [embed] });
 	},
 };

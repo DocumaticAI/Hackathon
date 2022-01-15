@@ -16,22 +16,14 @@ module.exports = class Bot extends Client {
 		await this.login(process.env.TOKEN);
 
 		const guild = this.guilds.cache.get(this.config.guildId);
-		await guild.commands.set(
-			this.commands.map((command) => {
-				return {
-					name: command.commandName,
-					description: command.description,
-					options: command.options,
-				};
-			})
-		);
+		await guild.commands.set(this.commands);
 	}
 
 	async loadOperations() {
 		const commands = await search(`${__dirname}/../Commands/**/*.js`);
 		commands.forEach((commandName) => {
 			const command = require(commandName);
-			this.commands.set(command.commandName, command);
+			this.commands.set(command.name, command);
 		});
 
 		const events = await search(`${__dirname}/../Events/*.js`);
