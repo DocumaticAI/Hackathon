@@ -91,14 +91,10 @@ class Password:
     def enter_pass(self):
         self.top.withdraw()
 
-        top = Toplevel(self.top)
-
-        icon = PhotoImage(file=join(dirname(main_file), "assets\\notepad+.png"))
-        top.iconphoto(False, icon)
+        top = Helper.setup_top(self.root, title="Set Password")
 
         self.root.eval("tk::PlaceWindow %s center" % top)
 
-        top.title("Set Password")
         top_label = Widgets.create_label(top, text="You seem new! Type here the password you want to use for your notepad.")
         top_label.pack()
 
