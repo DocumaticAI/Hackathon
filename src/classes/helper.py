@@ -25,6 +25,11 @@ class Helper:
 
         return file
 
+    @staticmethod
+    def get_notepad_path_raw(name: str, **kwargs):
+        file_path = join(Helper.get_notepads_directory(**kwargs), name) + ".txt"
+
+        return file_path
 
     @staticmethod
     def add_notepad(name: str, file_path: str = None, **kwargs) -> bool:
@@ -32,9 +37,9 @@ class Helper:
 
         if file_path:
             file_name = file_path.split("/")[-1].split(".")[0]
-            path = Helper.get_notepad_path(file_name, **kwargs)
+            path = Helper.get_notepad_path_raw(file_name, **kwargs)
         else:
-            path = Helper.get_notepad_path(name, **kwargs)
+            path = Helper.get_notepad_path_raw(name, **kwargs)
 
         if exists(path):
             return False
@@ -175,7 +180,6 @@ class Helper:
         file_path = join(Helper.get_notepads_directory(imported=True), name) + ".txt"
 
         if not exists(file_path):
-            print(file_path)
             return None
 
         with open(file_path, "r") as f:
