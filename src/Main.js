@@ -5,5 +5,5 @@ const bot = new Bot(config);
 
 bot.start();
 
-process.on('uncaughtException', error => console.log(error));
-process.on('unhandledRejection', error => console.log(error));
+process.on('uncaughtException', console.error);
+process.on('unhandledRejection', console.error);
