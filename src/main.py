@@ -3,12 +3,15 @@ from os.path import join, dirname
 from classes.master import Master
 from classes.password import Password
 
+DARK_MODE = "#25292e"
+
 def main():
     window = Tk()
     window.title("Notepad+ - by: @Takenkills")
     window.resizable(width=False, height=False)
     window.geometry("400x400")
     window.eval("tk::PlaceWindow %s center" % window.winfo_toplevel())
+    window.config(bg=DARK_MODE)
 
     icon = PhotoImage(file=join(dirname(__file__), "assets\\notepad+.png"))
     window.iconphoto(False, icon)
