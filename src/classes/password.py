@@ -1,4 +1,5 @@
 from classes.helper import Helper
+from classes.Widgets import Widgets
 from os.path import join, exists, getsize, dirname
 from tkinter import Toplevel, Tk, StringVar, PhotoImage
 from tkinter.ttk import Entry, Button, Label
@@ -21,21 +22,23 @@ class Password:
 
         self.top = Helper.setup_top(self.root, "Enter Password")
         self.root.eval("tk::PlaceWindow %s center" % self.top)
+        self.top.focus_set()
 
         self.password = self.get_pass()
 
-        self.entry = Entry(self.top, show="*")
+        self.entry = Widgets.create_entry(self.top, show="*")
         self.entry.pack()
-        self.entry.focus_set()
         self.entry.bind("<Return>", self.password_check)
 
-        self.confirm = Button(self.top, text="Confirm", command=self.password_check)
+        self.confirm = Widgets.create_button(self.top, text="Confirm", command=self.password_check)
         self.confirm.pack()
+
+        self.entry.focus_set()
 
     def password_check(self, *_):
         password = self.entry.get()
 
-        if password is None:
+        if password is None or password == "":
             return
 
         call = self.get_pass()
@@ -47,16 +50,18 @@ class Password:
         else:
             self.entry.delete(0, "end")
             self.entry.focus_set()
-            Helper.show_error("Wrong password!")
+
+            error = Helper.show_error("Wrong password!", self.root)
+            error.after(1000, error.destroy)
 
             self.entry.focus_set()
 
             self.tries += 1
 
             if self.tries >= 3:
-                Helper.show_error("You have entered the wrong password 3 times. Exiting...\n")
-                self.top.destroy()
-                self.root.destroy()
+                error = Helper.show_error("You have entered the wrong password 3 times. Exiting...\n", self.root)
+                self.top.after(1500, lambda: self.top.destroy() and self.root.destroy())
+                error.after(1500, error.destroy)
 
     def get_pass(self) -> str | StringVar:
         directory = Helper.get_notepads_directory()
@@ -94,12 +99,12 @@ class Password:
         self.root.eval("tk::PlaceWindow %s center" % top)
 
         top.title("Set Password")
-        top_label = Label(top, text="You seem new! Type here the password you want to use for your notepad.")
+        top_label = Widgets.create_label(top, text="You seem new! Type here the password you want to use for your notepad.")
         top_label.pack()
 
         var = StringVar()
 
-        top_entry = Entry(top, show="*", textvariable=var)
+        top_entry = Widgets.create_entry(top, show="*", textvariable=var)
         top_entry.pack()
 
         def call_back():
