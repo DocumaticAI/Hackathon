@@ -1,3 +1,4 @@
+from os.path import splitext
 from tkinter import Tk, filedialog
 from tkinter.ttk import Frame
 from classes.helper import Helper
@@ -59,6 +60,12 @@ class Master:
 
     def import_file(self):
         file = self.ask_import_file()
+
+        (_, ext) = splitext(file)
+
+        if ext != ".txt":
+            Helper.show_error("Currently only \".txt\" file extensions are supported.", self.root)
+            return
 
         if not file or not Helper.file_exists(file):
             return
@@ -173,8 +180,11 @@ class Master:
 
     def delete_all(self):
         try:
+            notepads = []
             for notepad in Helper.get_notepads():
-                Helper.delete_notepad(notepad.removesuffix(".txt"))
+                index = list(self.list_box.get(0, "end")).index(notepad.removesuffix(".txt"))
+                notepads.append(index)
+            self.delete_notepads(notepads)
         except OSError:
             Helper.show_error("I do not have permissions to delete files. Please run me as an administrator.", self.root)
             return
@@ -183,20 +193,29 @@ class Master:
         self.list_box.delete(0, "end")
 
     def delete_notepads(self, notes: list[int]):
-        notes = reversed(notes)
-        for index in notes:
-            name = self.list_box.get(index)
-            delete = Helper.delete_notepad(name)
+        _names = [self.list_box.get(n) for n in notes]
+        names = ", ".join(_names)
 
-            if not delete:
-                Helper.show_error("That notepad does not exist.", self.root)
-                return
-            elif delete == "perm":
-                Helper.show_error("I do not have permissions to delete files. Please run me as an administrator.", self.root)
-                return
+        wording = f"these notepads:\n{names}" if len(notes) > 1 else f"\"{names}\""
 
-            self.list_box.delete(index)
-            self.remove_view(name)
+        Helper.confirmation("Deletion", f"Are you sure you want to delete {wording}?",
+                            lambda: execute(notes), self.root)
+
+        def execute(selected):
+            selected = reversed(selected)
+            for index in selected:
+                name = self.list_box.get(index)
+                delete = Helper.delete_notepad(name, None)
+
+                if not delete:
+                    Helper.show_error("That notepad does not exist.", self.root)
+                    return
+                elif delete == "perm":
+                    Helper.show_error("I do not have permissions to delete files. Please run me as an administrator.", self.root)
+                    return
+
+                self.list_box.delete(index)
+                self.remove_view(name)
 
     def set_notepads(self):
         notepads: list[str] = Helper.get_notepads()
