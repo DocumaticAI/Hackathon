@@ -33,7 +33,7 @@ class Editor:
                                               insertbackground="white", undo=True,
                                               yscrollcommand=self.yscrollbar.set, xscrollcommand=self.xscrollbar.set,
                                               wrap="word")
-        print(self.original_text)
+
         self.text.insert(1.0, self.original_text)
 
         self.yscrollbar.config(command=self.text.yview)

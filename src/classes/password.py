@@ -1,9 +1,8 @@
 from classes.helper import Helper
 from classes.Widgets import Widgets
-from os.path import join, exists, getsize, dirname
-from tkinter import Toplevel, Tk, StringVar, PhotoImage
-from tkinter.ttk import Entry, Button, Label
-from __main__ import __file__ as main_file
+from os.path import join, getsize
+from tkinter import Toplevel, Tk, StringVar
+from tkinter.ttk import Button, Label
 
 def encrypt(password):
     import hashlib
@@ -68,7 +67,7 @@ class Password:
 
         file = join(directory, "__password__.txt")
 
-        if exists(file):
+        if Helper.file_exists(file):
             with open(file, "r") as pass_file:
                 if getsize(file) == 0:
                     return self.enter_pass()

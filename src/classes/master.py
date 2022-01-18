@@ -1,6 +1,5 @@
-from tkinter import Tk, filedialog, StringVar
+from tkinter import Tk, filedialog
 from tkinter.ttk import Frame
-from os.path import exists
 from classes.helper import Helper
 from classes.view_file import ViewFile
 from classes.Widgets import Widgets
@@ -61,7 +60,7 @@ class Master:
     def import_file(self):
         file = self.ask_import_file()
 
-        if not file or not exists(file):
+        if not file or not Helper.file_exists(file):
             return
 
         if not Helper.add_notepad(None, file, imported=True):
@@ -94,10 +93,9 @@ class Master:
         path = Helper.get_notepad_path(name)
 
         try:
-            if not exists(path):
+            if not Helper.file_exists(path):
                 path = Helper.get_notepad_path(name, imported=True)
-                if not exists(path):
-                    print(path)
+                if not Helper.file_exists(path):
                     Helper.show_error("The notepad you selected does not exist.", self.root)
                     return
         except:
@@ -119,8 +117,8 @@ class Master:
         name = self.list_box.get(selected[0])
 
         try:
-            if not exists(Helper.get_notepad_path(name)):
-                if not exists(Helper.get_notepad_path(name, imported=True)):
+            if not Helper.file_exists(Helper.get_notepad_path(name)):
+                if not Helper.file_exists(Helper.get_notepad_path(name, imported=True)):
                     Helper.show_error("The notepad does not exist.", self.root)
                     return
                 else:
@@ -170,7 +168,7 @@ class Master:
             if view in items:
                 continue
             else:
-                if exists(Helper.get_notepad_path(view)):
+                if Helper.file_exists(Helper.get_notepad_path(view)):
                     self.list_box.insert("end", view)
 
     def delete_all(self):
@@ -189,8 +187,6 @@ class Master:
         for index in notes:
             name = self.list_box.get(index)
             delete = Helper.delete_notepad(name)
-
-            print(exists("C:/Every Single Thing/Notepads/quotes lmao.txt"))
 
             if not delete:
                 Helper.show_error("That notepad does not exist.", self.root)

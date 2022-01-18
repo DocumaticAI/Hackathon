@@ -11,7 +11,7 @@ class Helper:
 
         path = join(_path, "notepads") if "imported" not in kwargs else join(_path, "notepads", "imported")
 
-        if not exists(path):
+        if not Helper.file_exists(path):
             mkdir(path)
 
         return path
@@ -42,7 +42,7 @@ class Helper:
         else:
             path = _path
 
-        if exists(path) or exists(_path):
+        if Helper.file_exists(path) or Helper.file_exists(_path):
             return False
 
         if name:
@@ -61,9 +61,9 @@ class Helper:
         if file_path:
             path = file_path
         try:
-            if not exists(path):
+            if not Helper.file_exists(path):
                 path = Helper.get_notepad_path(name, imported=True)
-                if exists(path):
+                if Helper.file_exists(path):
                     _path = Helper.get_notepad_path_raw(name, imported=True)
                     try:
                         remove(_path)
@@ -105,8 +105,8 @@ class Helper:
         return files
 
     @staticmethod
-    def show_error(error_message: str, root: Tk):
-        X_COORD = root.winfo_rootx() - 12
+    def show_error(error_message: str, root: Tk | None):
+        X_COORD = root.winfo_rootx() - 12 if root else 696
         Y_COORD = 150
 
         top_error = Helper.setup_top(None, "Error", geometry=f"300x100+{X_COORD}+{Y_COORD}", withdraw=False)
@@ -185,7 +185,7 @@ class Helper:
     def get_imported_file_path(name: str):
         file_path = join(Helper.get_notepads_directory(imported=True), name) + ".txt"
 
-        if not exists(file_path):
+        if not Helper.file_exists(file_path):
             return None
 
         with open(file_path, "r") as f:
@@ -195,8 +195,17 @@ class Helper:
     def get_imported_file_content(name: str):
         path = Helper.get_imported_file_path(name)
 
-        if not exists(path):
+        if not Helper.file_exists(path):
             return False
 
         with open(path, "r") as f:
             return f.read()
+
+    @staticmethod
+    def file_exists(path):
+        try:
+            boolean = exists(path)
+            return boolean
+        except OSError:
+            Helper.show_error("I do not have permission to access this file.", None)
+            return None
