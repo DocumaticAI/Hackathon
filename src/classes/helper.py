@@ -1,4 +1,4 @@
-from os.path import join, dirname, abspath, exists, isfile
+from os.path import join, dirname, abspath, exists, isfile, splitext
 from os import mkdir, remove, walk
 from tkinter import Toplevel, Tk, PhotoImage
 from classes.Widgets import Widgets
@@ -33,11 +33,12 @@ class Helper:
 
     @staticmethod
     def add_notepad(name: str, file_path: str = None, **kwargs) -> bool:
+        file_name = file_path.split("/")[-1].split(".")[0] if file_path else None
+
         path = ""
-        _path = Helper.get_notepad_path_raw(name) if not file_path else file_path
+        _path = Helper.get_notepad_path_raw(name) if not file_path else Helper.get_notepad_path_raw(file_name)
 
         if file_path:
-            file_name = file_path.split("/")[-1].split(".")[0]
             path = Helper.get_notepad_path_raw(file_name, **kwargs)
         else:
             path = _path
@@ -56,30 +57,30 @@ class Helper:
 
     @staticmethod
     def delete_notepad(name: str, file_path: str = None) -> bool | str:
-        path = Helper.get_notepad_path(name)
+        abs_path = (Helper.get_notepad_path(name), False)
+        raw_path = (Helper.get_notepad_path_raw(name), False)
 
         if file_path:
-            path = file_path
-        try:
-            if not Helper.file_exists(path):
-                path = Helper.get_notepad_path(name, imported=True)
-                if Helper.file_exists(path):
-                    _path = Helper.get_notepad_path_raw(name, imported=True)
-                    try:
-                        remove(_path)
-                    except OSError:
-                        return "perm"
-                else:
-                    return False
-        except:
-            return False
+            abs_path = (file_path, False)
 
-        try:
-            remove(path)
-        except OSError:
-            return "perm"
+        if not Helper.file_exists(abs_path[0]):
+            abs_path = (Helper.get_notepad_path(name, imported=True), True)
+            raw_path = (Helper.get_notepad_path_raw(name, imported=True), True)
 
-        return True
+            if not Helper.file_exists(abs_path[0]):
+                return "File does not exist"
+
+        def try_delete(__path__: str):
+            try:
+                remove(__path__)
+                return True
+            except OSError:
+                return "perm"
+
+        if not abs_path[1]:
+            return try_delete(abs_path[0])
+        else:
+            return try_delete(raw_path[0])
 
     @staticmethod
     def get_notepads() -> list[str]:
@@ -206,6 +207,6 @@ class Helper:
         try:
             boolean = exists(path)
             return boolean
-        except OSError:
-            Helper.show_error("I do not have permission to access this file.", None)
+        except:
+            Helper.show_error("I either don't have permissions to access this file\n\t or the file does not exist anymore", None)
             return None
