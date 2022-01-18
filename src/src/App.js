@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import './App.css';
-// import './index.css'
 import firebase from 'firebase/app';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import 'firebase/firestore';
@@ -13,6 +12,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+
 firebase.initializeApp(config)
 const auth = firebase.auth();
 const firestore = firebase.firestore();
