@@ -92,12 +92,16 @@ class Master:
         name = self.list_box.get(selected)
 
         path = Helper.get_notepad_path(name)
+
         try:
             if not exists(path):
-                Helper.show_error("The file does not exist.", self.root)
-                return
+                path = Helper.get_notepad_path(name, imported=True)
+                if not exists(path):
+                    print(path)
+                    Helper.show_error("The notepad you selected does not exist.", self.root)
+                    return
         except:
-            Helper.show_error("The file does not exist.", self.root)
+            Helper.show_error("The notepad you selected does not exist anymore.", self.root)
             return
 
         Editor(name, path, self.root)
@@ -185,6 +189,8 @@ class Master:
         for index in notes:
             name = self.list_box.get(index)
             delete = Helper.delete_notepad(name)
+
+            print(exists("C:/Every Single Thing/Notepads/quotes lmao.txt"))
 
             if not delete:
                 Helper.show_error("That notepad does not exist.", self.root)
