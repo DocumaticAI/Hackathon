@@ -1,3 +1,6 @@
+const { Sphere, Donut } = require("./body.js");
+const { eq, unitVector, Point, Vector } = require("./math.js");
+
 const light = {
   "from": [10, 10, 0],
   "power": 15
@@ -5,6 +8,9 @@ const light = {
 
 const screen = [30, 30];
 const state = ".,-~+^*!:;?=%&@#"; // 0 - 15
+
+const body = new Sphere([0, 0, 10], 10);
+render();
 
 function render(){
   const L = new Point(...light.from);
