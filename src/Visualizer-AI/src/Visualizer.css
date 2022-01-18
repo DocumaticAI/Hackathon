@@ -1,0 +1,221 @@
+:root{
+    --hover-color:#d0d6d4;
+}
+.main{
+    color: rgb(32, 31, 31);
+    text-align: center;
+    height: 700px;
+    margin-top: -50px;
+    
+}
+
+.quote{
+    margin-left: 400px;
+    margin-top: 30px;
+    margin-bottom: -3px;
+    font-size: 17px;
+    font-family: monospace;
+    color: white;
+}
+
+.quoteText{
+    animation-name: quoteAnimation;
+    animation-duration: 1s;
+    animation-delay: 1.2s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes quoteAnimation{
+    0%{
+        color: white;
+    }
+    100%{
+        color: rgb(104, 104, 104);
+    }
+}
+.welbotron{
+    position: relative;
+    padding-top: 2.2em;
+    background:rgb(0,0);
+}
+
+.welc{
+    margin-top: -70px;
+    height: 350px;
+}
+
+.welcome{
+    margin-top: 0px;
+    color:#000000;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 3.7rem;
+    font-weight: 300;
+    line-height: 1.2;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    animation-name: welcomeAnimation;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+                
+.navbtn{
+    font-family: Calibri;
+    margin-left: 3px;
+    width: 140px;
+    max-height: 40px;
+    
+}
+
+@keyframes welcomeAnimation{
+    0%{
+        color:rgb(235, 235, 235);
+    }
+    100%{
+        color:rgb(0, 0, 0);
+        margin-top: 200px;
+    }
+}
+
+.mainpage-btn{
+    margin-left:10px;
+    padding: 100px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: consolas;
+}
+
+h1+.mainpage-b{
+    margin-left: 30px;
+    color: rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
+}
+.mainpage-b+.mainpage-b{
+    color: rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
+}
+.mainpage-b{  
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    margin-left: 40px;
+    margin-top: 50px;
+    position: relative;
+    min-width: 100px;
+    display: inline-block;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none !important;
+    overflow: hidden;
+    transition: 0.2s;
+    color: rgb(235, 235, 235);
+    animation-name: buttonAnimation;
+    animation-duration: 2s;
+    animation-delay: 0.75s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes buttonAnimation{
+    0%{
+        color: rgb(235, 235, 235);
+    }
+    100%{
+        color: rgb(0, 0, 0);
+        background: rgb(241, 238, 238);
+    }
+
+}
+
+.mainpage-b:hover{
+    color: #888742;
+    background:var(--hover-color);
+    box-shadow: 0 0 10px var(--hover-color), 0 0 40px var(--hover-color), 0 0 80px var(--hover-color);
+    
+    transition-delay: 0.2s;
+}
+
+.mainpage-b span{
+    position: absolute;
+    display: block;
+}
+
+.mainpage-b span:nth-child(1){
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent,var(--hover-color));
+}
+
+.mainpage-b:hover span:nth-child(1){
+    left: 100%;
+    transition: 1s;
+}
+
+.modal-body-alert{
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.intro{
+    text-align: left;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.uses-list{
+    margin-top: 10px;
+    margin-left: 10px;
+    line-height: 0.5;
+    font-family: monospace;
+}
+
+.tips{
+    color: rgb(99, 99, 99);
+    margin-top: -15px;
+    font-size: 16px;
+}
+
+.simg{
+    display: inline-block;
+    margin-left: 3px;
+    margin-right: 3px;
+    height: 30px;
+    width: 30px;
+    background-image: url("s.svg");
+    background-size: 30px, 30px;
+}
+
+.fimg{
+    margin-left: 3px;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-image: url("f.svg");
+    background-size: 30px, 30px;
+}
+
+.githubimg{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}

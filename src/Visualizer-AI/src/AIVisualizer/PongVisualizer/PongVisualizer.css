@@ -1,0 +1,61 @@
+.w-text{
+    margin-top: 10px;
+    font-family: monospace;
+    font-size: 20px;
+    
+}
+.num{
+    color: rgb(93, 139, 112);
+}
+
+.pongDescription{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;    
+    -o-user-select: none;
+    user-select: none;
+    animation-name: pongAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0.5s;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+    color: white;
+}
+
+@keyframes pongAnimation{
+    0%{
+        color: white;
+    }
+    100%{
+        color: black;
+    }
+}
+
+.pong-stage{
+    position: absolute;
+    margin-top: 70px;
+    margin-left: 15px;
+}
+
+.pong-stage-notstarted{
+    position: absolute;
+    margin-top: 70px;
+    margin-left: 15px;
+    animation-name: stageAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes stageAnimation{
+    0%{
+        margin-top: -500px;
+    }
+}
