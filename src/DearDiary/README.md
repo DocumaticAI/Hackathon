@@ -78,9 +78,6 @@ We save entries using Google Firestore for realtime persistence so that users ca
 
 ---
 
-
-
-
 ### Prior art:
 
 Jazz Keys: https://jazzkeys.plan8.co/
@@ -89,15 +86,6 @@ Magenta-js: https://github.com/magenta/magenta-js
 
 Tone.js: https://tonejs.github.io/
 
-### Credit:
-
-[
-
-[Excellent tutorial on MusicVAE](https://medium.com/@torinblankensmith/melody-mixer-using-deeplearn-js-to-mix-melodies-in-the-browser-8ad5b42b4d0b)
-
-[IP Location Finder by KeyCDN](https://tools.keycdn.com/geo)
-
-[Fantastic tutorial on Magenta-js in general](https://hello-magenta.glitch.me/)
 
 ### Codebase instructions
 
