@@ -1,8 +1,7 @@
 # Turn your journal into music
 
-## [DearDiary.ai](https://deardiary.ai/)
+## [DearDiary.ai](https://deardiary.ga/)
 
-### **Breaking news –** We are honored to be a winning project in the [Magenta and Gray Area ML and music hackathon](https://bitrate.devpost.com/project-gallery)!
 
 ---
 
@@ -79,11 +78,8 @@ We save entries using Google Firestore for realtime persistence so that users ca
 
 ---
 
-### Contributors:
 
-- Stephen Haney – https://twitter.com/sdothaney
-- Suyash Joshi – https://twitter.com/suyashcjoshi
-- Devin Lane – https://twitter.com/gentle_return
+
 
 ### Prior art:
 
@@ -95,9 +91,7 @@ Tone.js: https://tonejs.github.io/
 
 ### Credit:
 
-[vaderSentiment-js](https://github.com/vaderSentiment/vaderSentiment-js)
-
-[Journal tree](http://clipart-library.com/clip-art/tree-silhouette-svg-25.htm)
+[
 
 [Excellent tutorial on MusicVAE](https://medium.com/@torinblankensmith/melody-mixer-using-deeplearn-js-to-mix-melodies-in-the-browser-8ad5b42b4d0b)
 
