@@ -11,6 +11,8 @@ class Game {
     this.speedX = 0; // -1: left, 0: straight, 1: right
     this.translateX = 0;
 
+    this.rotationLerp = null;
+
     // prepare 3D scene
     this._initializeScene(scene, camera);
 
@@ -21,7 +23,11 @@ class Game {
     
     update() {
       // recompute the game state
-      this.time += this.clock.getDelta();
+      const timeDelta = this.clock.getDelta();
+      this.time += timeDelta;
+
+      if (this.rotationLerp !== null)
+        this.rotationLerp.update(timeDelta);
   
       this.translateX += this.speedX * -0.05;
   
@@ -43,14 +49,25 @@ class Game {
           return;
     }
 
-    this.speedX = newSpeedX;
+    if (this.speedX !== newSpeedX) {
+      this.speedX = newSpeedX;
+      this._rotateShip(-this.speedX * 20 * Math.PI / 180, 0.8);
+    }
   }
   
   _keyup() {
     this.speedX = 0;
+    this._rotateShip(0, 0.5);
   }
 
-    _updateGrid() {
+  _rotateShip(targetRotation, delay) {
+    const $this = this;
+    this.rotationLerp = new Lerp(this.ship.rotation.z, targetRotation, delay)
+      .onUpdate((value) => { $this.ship.rotation.z = value })
+      .onFinish(() => { $this.rotationLerp = null });
+  }
+
+  _updateGrid() {
       this.grid.material.uniforms.time.value = this.time;
       this.objectsParent.position.z = this.speedZ * this.time;
 
@@ -63,7 +80,7 @@ class Game {
           const childZPos = child.position.z + this.objectsParent.position.z;
           if (childZPos > 0) {
             // reset the object
-            const params = [child, this.ship.position.x, -this.objectsParent.position.z];
+            const params = [child, -this.translateX, -this.objectsParent.position.z];
             if (child.userData.type === 'obstacle') {
               this._setupObstacle(...params);
             }
@@ -75,22 +92,22 @@ class Game {
       });
     }
 
-    _checkCollisions() {
+  _checkCollisions() {
       // check obstacles
       // check bonuses
     }
 
-    _updateInfoPanel() {
+  _updateInfoPanel() {
       // obstacles
       // bonuses
     }
 
-    _gameOver() {
+  _gameOver() {
       // show "end state" UI
       // reset instance variables for a new game
     }
 
-    _createShip(scene) {
+  _createShip(scene) {
       const shipBody = new THREE.Mesh(
         new THREE.TetrahedronBufferGeometry(0.4),
         new THREE.MeshBasicMaterial({ color: 0x91C483 }),
@@ -137,7 +154,7 @@ class Game {
       reactorLight3.position.set(0, -0.15, 0.11);
     }
 
-    _createGrid(scene) {
+  _createGrid(scene) {
 
       let divisions = 30;
       let gridLimit = 200;
@@ -211,7 +228,7 @@ class Game {
     this.clock = new THREE.Clock();
   }
     
-    _initializeScene(scene, camera) {
+  _initializeScene(scene, camera) {
       this._createShip(scene);
       this._createGrid(scene);
 
@@ -229,7 +246,7 @@ class Game {
       camera.position.set(0, 1.5, 2);
     }
 
-    _spawnObstacle() {
+  _spawnObstacle() {
       const obj = new THREE.Mesh(
         this.OBSTACLE_PREFAB,
         this.OBSTACLE_MATERIAL
@@ -240,7 +257,7 @@ class Game {
       this.objectsParent.add(obj);
     }
 
-    _setupObstacle(obj, refXPos = 0, refZPos = 0) {
+  _setupObstacle(obj, refXPos = 0, refZPos = 0) {
       // random scale
       obj.scale.set(
         this._randomFloat(0.5, 2),
@@ -256,7 +273,7 @@ class Game {
       );
     }
     
-    _spawnBonus() {
+  _spawnBonus() {
       const obj = new THREE.Mesh(
         this.BONUS_PREFAB,
         new THREE.MeshBasicMaterial({ color: 0x000000 })
@@ -266,7 +283,7 @@ class Game {
       this.objectsParent.add(obj);
     }
     
-    _setupBonus(obj, refXPos = 0, refZPos = 0) {
+  _setupBonus(obj, refXPos = 0, refZPos = 0) {
       const price = this._randomInt(5, 20);
       const ratio = price / 20;
   
@@ -283,11 +300,11 @@ class Game {
       );
     }
 
-    _randomFloat(min, max) {
+  _randomFloat(min, max) {
       return Math.random() * (max - min) + min;
     }
 
-    _randomInt(min, max) {
+  _randomInt(min, max) {
       min = Math.ceil(min);
       max = Math.floor(max);
       return Math.floor(Math.random() * (max - min + 1)) + min;
