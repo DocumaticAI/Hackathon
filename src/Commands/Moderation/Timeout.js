@@ -2,8 +2,8 @@ const { confirm } = require('../../Structures/Utils');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-	name: 'ban',
-	description: 'Ban a member.',
+	name: 'timeout',
+	description: 'Timeout a member.',
 	category: 'Moderation',
 	options: [
 		{
@@ -13,25 +13,32 @@ module.exports = {
 			type: 'USER'
 		},
 		{
+			name: 'duration',
+			description: 'The timeout duration',
+			type: 'STRING',
+			required: true
+		},
+		{
 			name: 'reason',
 			description: 'Specify reason for ban',
 			required: true,
 			type: 'STRING'
 		}
 	],
-	permissions: 'BAN_MEMBERS',
-	async run({ interaction, bot, guild }) {
-		const member = interaction.options.getMember('user');
-		const reason = interaction.options.getString('reason');
+	permissions: 'MODERATE_MEMBERS',
+	async run({ interaction, options, bot, guild }) {
+		const member = interaction.options.getMember('user', true);
+		const duration = interaction.options.getString('duration', true);
+		const reason = interaction.options.getString('reason', true);
 
-		if (!member.bannable)
-			return interaction.reply({
-				embeds: [new MessageEmbed().setColor('RED').setDescription(`I don't have permissions to ban ${member}.`)]
+		if (!member.moderatable)
+			return await interaction.reply({
+				embeds: [new MessageEmbed().setColor('RED').setDescription("I can't timeout them.")]
 			});
 
 		if (member.id === interaction.user.id)
-			return interaction.reply({
-				embeds: [new MessageEmbed().setColor('RED').setDescription(`You cannot ban yourself.`)]
+			return await interaction.reply({
+				embeds: [new MessageEmbed().setColor('RED').setDescription("You can't timeout yourself.")]
 			});
 
 		const confirmation = await confirm(
@@ -44,18 +51,21 @@ module.exports = {
 		);
 
 		if (confirmation.proceed) {
+			await member.timeout(ms(duration), reason);
+
 			const embed = new MessageEmbed()
 				.setColor(bot.config.colors.green)
-				.setDescription(`${bot.config.emotes.success} **${member.user.tag}** was banned for \`${reason}\`.`);
+				.setDescription(`${bot.config.emotes.success} **${member.user.tag}** was timedout for \`${reason}\`.`);
 
 			try {
 				await member.send({
 					embeds: [
 						new MessageEmbed()
-							.setTitle('You were banned')
+							.setTitle('You were timedout')
 							.setColor('BLURPLE')
 							.addField('Reason', reason, false)
 							.addField('Guild', interaction.guild.name, false)
+							.addField('Duration', ms(ms(duration), { long: true }))
 							.addField('Date', time(new Date(), 'F'), false) // TODO: add date to the other DMs
 					]
 				});
@@ -64,17 +74,20 @@ module.exports = {
 					text: `I was not able to DM inform them`
 				});
 			}
+
 			await confirmation.i.update({
-				embeds: [embed],
-				components: []
+				embeds: [
+					new MessageEmbed()
+						.setColor(bot.config.colors.green)
+						.setDescription(`${bot.config.emotes.success} **${member.id}** was timedout successfully.`)
+				]
 			});
-			return await member.ban({ reason });
 		}
 
 		const embed = new MessageEmbed()
 			.setTitle('Process Cancelled')
 			.setColor('BLURPLE')
-			.setDescription(`${member} was not banned.`);
+			.setDescription(`${member} was not timedout.`);
 
 		if (confirmation.reason) embed.setFooter({ text: confirmation.reason });
 

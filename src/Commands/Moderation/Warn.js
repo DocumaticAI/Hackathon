@@ -1,9 +1,11 @@
-const { confirm } = require('../../Structures/Utils');
+const { getRandomString, confirm } = require('../../Structures/Utils');
+const Warning = require('../../Models/Warning');
+const { time } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-	name: 'ban',
-	description: 'Ban a member.',
+	name: 'warn',
+	description: 'Warn someone.',
 	category: 'Moderation',
 	options: [
 		{
@@ -14,24 +16,19 @@ module.exports = {
 		},
 		{
 			name: 'reason',
-			description: 'Specify reason for ban',
+			description: 'Specify reason for warn',
 			required: true,
 			type: 'STRING'
 		}
 	],
-	permissions: 'BAN_MEMBERS',
-	async run({ interaction, bot, guild }) {
+	permissions: 'MODERATE_MEMBERS',
+	async run({ interaction, options, bot, guild }) {
 		const member = interaction.options.getMember('user');
 		const reason = interaction.options.getString('reason');
 
-		if (!member.bannable)
-			return interaction.reply({
-				embeds: [new MessageEmbed().setColor('RED').setDescription(`I don't have permissions to ban ${member}.`)]
-			});
-
 		if (member.id === interaction.user.id)
 			return interaction.reply({
-				embeds: [new MessageEmbed().setColor('RED').setDescription(`You cannot ban yourself.`)]
+				embeds: [new MessageEmbed().setColor('RED').setDescription(`You cannot warn yourself.`)]
 			});
 
 		const confirmation = await confirm(
@@ -39,24 +36,32 @@ module.exports = {
 			new MessageEmbed()
 				.setTitle('Pending Conformation')
 				.setColor('BLURPLE')
-				.setDescription(`Are you sure you want to ban ${member} for reason: \`${reason}\`?`)
+				.setDescription(`Are you sure you want to warn ${member} for reason: \`${reason}\`?`)
 				.setFooter({ text: 'You have 60 seconds.' })
 		);
 
 		if (confirmation.proceed) {
+			const warnID = getRandomString(5);
+			await new Warning({
+				GuildID: interaction.guild.id,
+				WarnID: warnID,
+				Reason: reason,
+				Moderator: interaction.user.id
+			}).save();
 			const embed = new MessageEmbed()
 				.setColor(bot.config.colors.green)
-				.setDescription(`${bot.config.emotes.success} **${member.user.tag}** was banned for \`${reason}\`.`);
+				.setDescription(`${bot.config.emotes.success} **${member.user.tag}** was warned for \`${reason}\`.`);
 
 			try {
 				await member.send({
 					embeds: [
 						new MessageEmbed()
-							.setTitle('You were banned')
+							.setTitle('You were warned')
 							.setColor('BLURPLE')
 							.addField('Reason', reason, false)
-							.addField('Guild', interaction.guild.name, false)
+							.addField('Warn ID', warnID, false)
 							.addField('Date', time(new Date(), 'F'), false) // TODO: add date to the other DMs
+							.addField('Guild', interaction.guild.name, false)
 					]
 				});
 			} catch (err) {
@@ -64,17 +69,16 @@ module.exports = {
 					text: `I was not able to DM inform them`
 				});
 			}
-			await confirmation.i.update({
+			return await confirmation.i.update({
 				embeds: [embed],
 				components: []
 			});
-			return await member.ban({ reason });
 		}
 
 		const embed = new MessageEmbed()
 			.setTitle('Process Cancelled')
 			.setColor('BLURPLE')
-			.setDescription(`${member} was not banned.`);
+			.setDescription(`${member} was not warned.`);
 
 		if (confirmation.reason) embed.setFooter({ text: confirmation.reason });
 
