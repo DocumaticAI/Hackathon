@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://rahuldkjain.github.io/gh-profile-readme-generator">
+  <a href="https://krypton-hackathon0/hackathon">
     <img alt="GitHub Profile Readme Generator" src="./src/images/mdg.png" width="60" />
   </a>
 </p>
@@ -8,19 +8,19 @@
 </h1>
 
 <p align="center">
-<a href="https://github.com/rahuldkjain/github-profile-readme-generator/blob/master/LICENSE" target="blank">
+<a href="https://github.com/krypton-hackathon0/hackathon/blob/master/LICENSE" target="blank">
 <img src="https://img.shields.io/github/license/rahuldkjain/github-profile-readme-generator?style=flat-square" alt="github-profile-readme-generator license" />
 </a>
-<a href="https://github.com/rahuldkjain/github-profile-readme-generator/fork" target="blank">
+<a href="https://github.com/krypton-hackathon0/hackathon/fork" target="blank">
 <img src="https://img.shields.io/github/forks/rahuldkjain/github-profile-readme-generator?style=flat-square" alt="github-profile-readme-generator forks"/>
 </a>
-<a href="https://github.com/rahuldkjain/github-profile-readme-generator/stargazers" target="blank">
+<a href="https://github.com/krypton-hackathon0/hackathon/stargazers" target="blank">
 <img src="https://img.shields.io/github/stars/rahuldkjain/github-profile-readme-generator?style=flat-square" alt="github-profile-readme-generator stars"/>
 </a>
-<a href="https://github.com/rahuldkjain/github-profile-readme-generator/issues" target="blank">
+<a href="https://github.com/krypton-hackathon0/hackathon/issues" target="blank">
 <img src="https://img.shields.io/github/issues/rahuldkjain/github-profile-readme-generator?style=flat-square" alt="github-profile-readme-generator issues"/>
 </a>
-<a href="https://github.com/rahuldkjain/github-profile-readme-generator/pulls" target="blank">
+<a href="https://github.com/krypton-hackathon0/hackathon/pulls" target="blank">
 <img src="https://img.shields.io/github/issues-pr/rahuldkjain/github-profile-readme-generator?style=flat-square" alt="github-profile-readme-generator pull-requests"/>
 </a>
 <a href="https://discord.gg/HHMs7Eg" target="blank">
