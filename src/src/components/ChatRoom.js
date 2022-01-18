@@ -1,7 +1,7 @@
 import Message from './Message'
 import React, { useRef, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 import Logout from './Logout';
 
 const ChatRoom = ({ firestore, auth, firebase }) => {

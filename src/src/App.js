@@ -6,7 +6,8 @@ import 'firebase/firestore';
 import ChatRoom from './components/ChatRoom'
 import 'firebase/auth';
 import Login from './components/Login';
-import config from '../../secrets.json'
+import config from './secrets.json'
+
 import {
   BrowserRouter as Router,
   Switch,
