@@ -34,14 +34,15 @@ class Helper:
     @staticmethod
     def add_notepad(name: str, file_path: str = None, **kwargs) -> bool:
         path = ""
+        _path = Helper.get_notepad_path_raw(name) if not file_path else file_path
 
         if file_path:
             file_name = file_path.split("/")[-1].split(".")[0]
             path = Helper.get_notepad_path_raw(file_name, **kwargs)
         else:
-            path = Helper.get_notepad_path_raw(name, **kwargs)
+            path = _path
 
-        if exists(path):
+        if exists(path) or exists(_path):
             return False
 
         if name:
@@ -61,8 +62,13 @@ class Helper:
             path = file_path
         try:
             if not exists(path):
-                if exists(Helper.get_notepad_path(name, imported=True)):
-                    path = Helper.get_notepad_path(name, imported=True)
+                path = Helper.get_notepad_path(name, imported=True)
+                if exists(path):
+                    _path = Helper.get_notepad_path_raw(name, imported=True)
+                    try:
+                        remove(_path)
+                    except OSError:
+                        return "perm"
                 else:
                     return False
         except:
