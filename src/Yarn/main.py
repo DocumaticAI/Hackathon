@@ -4,6 +4,8 @@ import sys
 import time
 
 # Regular Functions
+from Functions.RPS import RPS
+from Functions.GTP import GTP
 from Functions.Greet import Greet
 from Functions.Weather import Weather
 from Functions.PlaySong import PlaySong
@@ -31,8 +33,11 @@ from Functions.Miscellaneous.WikipediaSearch import WikipediaSearch
 # Greet Function
 try:
     Greet()
-    if not os.path.exists('Music'):
-        os.makedirs('Music')
+    if not os.path.exists("Music"):
+        os.makedirs("Music")
+    elif not os.path.exists("Images"):
+        os.makedirs("Images")
+
 except KeyboardInterrupt:
     sys.exit()
 
@@ -128,7 +133,7 @@ while True:
                     GetQuote()
                 except KeyboardInterrupt:
                     sys.exit()
-            
+
             elif "whatsapp" in command:
                 try:
                     SendWhatsappMsg()
@@ -140,17 +145,29 @@ while True:
                     SendEmail()
                 except KeyboardInterrupt:
                     sys.exit()
-                    
+
             elif "password" in command:
                 try:
                     PasswordGen()
                 except KeyboardInterrupt:
                     sys.exit()
-                    
+
             elif "alarm" in command:
                 try:
                     SetAlarm()
                     time.sleep(1.3)
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "rock paper and scissors" in command:
+                try:
+                    RPS()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "guess the pokemon" in command:
+                try:
+                    GTP()
                 except KeyboardInterrupt:
                     sys.exit()
 

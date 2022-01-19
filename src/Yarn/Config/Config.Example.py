@@ -1,1 +1,1 @@
-config = {"Email": "", "Password": "", "WeatherAPI": "", "AQIAPI": ""}
+config = {"Email": "", "Password": "", "WeatherAPI": "", "AQIAPI": "", "SujalAPI": ""}
