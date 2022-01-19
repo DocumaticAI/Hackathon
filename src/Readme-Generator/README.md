@@ -31,7 +31,7 @@
 <p align="center"><img src="./src/images/github-profile-readme-generator.gif" alt="github-profile-readme-generator gif" /></p>
 
 <p align="center">
-    <a href="https://readme-gen.ga" target="blank">View Demo</a>
+    <a href="https://readme-generator.ga" target="blank">View Demo</a>
     ·
     <a href="https://github.com/krypton-hackathon0/hackathon/issues/new/choose">Report Bug</a>
     ·
