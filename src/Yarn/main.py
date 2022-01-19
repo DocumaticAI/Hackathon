@@ -7,6 +7,7 @@ from Functions.YouTubePlay import YouTubePlay
 from Functions.ProjectBase import takeCommand
 from Functions.GoogleSearch import GoogleSearch
 from Functions.YouTubeSearch import YouTubeSearch
+from Functions.NewsHeadlines import NewsHeadlines
 
 # Miscellaneous Functions
 from Functions.Miscellaneous.Quit import Quit
@@ -76,6 +77,12 @@ while True:
             elif "wikipedia" in command:
                 try:
                     WikipediaSearch()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "news" in command:
+                try:
+                    NewsHeadlines()
                 except KeyboardInterrupt:
                     sys.exit()
 
