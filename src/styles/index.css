@@ -86,42 +86,66 @@ body {
   }
 
 /* =====================
-   INTRO OVERLAY PANEL
-   ===================== */
- #intro-panel {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: grid;
-    place-items: center;
-    background-color: black;
-    color: white;
-    font-family: monospace;
-    z-index: 10;
-  }
+ * INTRO/GAME OVER
+ * OVERLAY PANELS
+ * ===================== */
+ #intro-panel,
+ #game-over-panel {
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   display: grid;
+   place-items: center;
+   background-color: black;
+   color: white;
+   font-family: monospace;
+   z-index: 10;
+ }
 
-#intro-column {
-  text-align: center;
-}
-
-#intro-title {
-  font-size: 2rem;
-  margin-bottom: 3rem;
-}
-
-#start-button {
-    background-color: black;
-    border: 1px solid white;
-    padding: 0.5rem;
-    color: white;
-    font-family: monospace;
-    cursor: pointer;
+ #game-over-panel {
+    display: none;
   }
-  #start-button:hover {
-    background-color: #302b5e;
-  }
-  #start-button:active {
-    background-color: #0f0a49;
-  }
+ 
+ #intro-column,
+ #game-over-column {
+   text-align: center;
+ }
+ 
+ #intro-title,
+ #game-over-title {
+   font-size: 2rem;
+   margin-bottom: 3rem;
+ }
+ 
+ #start-button,
+ #replay-button {
+   background-color: black;
+   border: 1px solid white;
+   padding: 0.5rem;
+   color: white;
+   font-family: monospace;
+   cursor: pointer;
+ }
+ #start-button:hover,
+ #replay-button:hover {
+   background-color: #302b5e;
+ }
+ #start-button:active,
+ #replay-button:active {
+   background-color: #0f0a49;
+ }
+ 
+ #game-over-score-row,
+ #game-over-distance-row {
+   display: flex;
+   justify-content: center;
+   font-size: 1.2rem;
+   margin-bottom: 2rem;
+ }
+ 
+ #game-over-score,
+ #game-over-distance {
+   margin-left: 0.5rem;
+ }

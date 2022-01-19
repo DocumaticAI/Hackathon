@@ -8,33 +8,30 @@ class Game {
   COLLISION_THRESHOLD = 0.2;
 
   constructor(scene, camera) {
-    // initialize variables
-    this.running = false;
-    this.speedZ = 20;
-    this.speedX = 0; // -1: left, 0: straight, 1: right
-    this.translateX = 0;
-
-    this.health = 100;
-    this.score = 0;
-
-    this.rotationLerp = null;
-
+    //html dom elements
     this.divScore = document.getElementById('score');
     this.divDistance = document.getElementById('distance');
     this.divHealth = document.getElementById('health');
+
+    this.divGameOverPanel = document.getElementById('game-over-panel');
+    this.divGameOverScore = document.getElementById('game-over-score');
+    this.divGameOverDistance = document.getElementById('game-over-distance');
 
     document.getElementById('start-button').onclick = () => {
       this.running = true;
       document.getElementById('intro-panel').style.display = 'none';
     };
 
-    // initialize displays with start values
-    this.divScore.innerText = this.score;
-    this.divDistance.innerText = 0;
-    this.divHealth.value = this.health;
+    document.getElementById('replay-button').onclick = () => {
+      this.running = true;
+      this.divGameOverPanel.style.display = 'none';
+    };
 
-    // prepare 3D scene
-    this._initializeScene(scene, camera);
+    this.scene = scene;
+    this.camera = camera;
+    this._reset(false);
+
+    
 
     // bind event callbacks
     document.addEventListener('keydown', this._keydown.bind(this));
@@ -56,6 +53,30 @@ class Game {
       this._updateGrid();
       this._checkCollisions();
       this._updateInfoPanel();
+    }
+
+    _reset(replay) {
+      // initialize variables
+    this.running = false;
+    this.speedZ = 20;
+    this.speedX = 0; // -1: left, 0: straight, 1: right
+    this.translateX = 0;
+
+    this.time = 0;
+    this.clock = new THREE.Clock();
+
+    this.health = 100;
+    this.score = 0;
+
+    this.rotationLerp = null;
+
+    // show initial values
+    this.divScore.innerText = this.score;
+    this.divDistance.innerText = 0;
+    this.divHealth.value = this.health;
+
+    // prepare 3D scene
+    this._initializeScene(this.scene, this.camera, replay);
     }
 
     _keydown(event) {
@@ -135,6 +156,8 @@ class Game {
             this.health -= 10;
             this.divHealth.value = this.health;
             this._setupObstacle(...params);
+            if (this.health <= 0)
+              this._gameOver();
           }
           else {
             this.score += child.userData.price;
@@ -151,9 +174,17 @@ class Game {
     }
 
   _gameOver() {
-      // show "end state" UI
-      // reset instance variables for a new game
-    }
+    // prepare end state
+    this.running = false;
+    // (show ui)
+    this.divGameOverScore.innerText = this.score;
+    this.divGameOverDistance.innerText = this.objectsParent.position.z.toFixed(0);
+    setTimeout(() => {      
+      this.divGameOverPanel.style.display = 'grid';
+      // (reset variables)
+      this._reset(true);
+    }, 1000);
+  }
 
   _createShip(scene) {
       const shipBody = new THREE.Mesh(
@@ -271,12 +302,11 @@ class Game {
     });
 
     scene.add(this.grid);
-
-    this.time = 0;
-    this.clock = new THREE.Clock();
   }
     
-  _initializeScene(scene, camera) {
+  _initializeScene(scene, camera, replay) {
+    if(!replay) {
+      //first load
       this._createShip(scene);
       this._createGrid(scene);
 
@@ -292,7 +322,23 @@ class Game {
 
       camera.rotateX(-20 * Math.PI / 180);
       camera.position.set(0, 1.5, 2);
+    } else{
+      //replay
+      this.objectsParent.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          // object inside the anchor
+          if (child.userData.type === 'obstacle')
+            this._setupObstacle(child);
+          else
+            child.userData.price = this._setupBonus(child);
+        }
+        else {
+          // the anchor itself
+          child.position.set(0, 0, 0);
+        }
+      });
     }
+  }
 
   _spawnObstacle() {
       const obj = new THREE.Mesh(
