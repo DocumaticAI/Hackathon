@@ -39,7 +39,7 @@
 </p>
 
 <p align="center">
-<i>Loved the tool? Please consider <a href="https://paypal.me/rahuldkjain/10">donating</a>  💸 to help it improve!</i>
+<i>Loved the tool? Please consider <a href="https://paypal.me/radondev">donating</a>  💸 to help it improve!</i>
 </p>
 
 <p align="center">
@@ -57,11 +57,11 @@ This tool provides an easy way to create a GitHub profile readme with the latest
 
 ## 🚀 Demo
 
-<a href="https://Readme-Gen.ga" target="blank">
+<a href="https://readme-generator.ga" target="blank">
 <img src="https://img.shields.io/website?url=https%3A%2F%2Frahuldkjain.github.io%2Fgh-profile-readme-generator&logo=github&style=flat-square" />
 </a>
 
-Try the tool: [GitHub Profile README Generator](https://rahuldkjain.github.io/gh-profile-readme-generator)
+Try the tool: [GitHub Profile README Generator](https://readme-generator.ga)
 
 ## 🧐 Features
 
@@ -85,7 +85,7 @@ Just fill in the details such as `Name`, `Tagline`, `Dev Platforms Username`, `C
 
 - **Dynamic Personal Blogs from RSS Feed** (GitHub Action)
 
-- **Wakatime Stats** [contribute](https://github.com/rahuldkjain/github-profile-readme-generator/issues/115)
+- **Wakatime Stats** [contribute](https://github.com/krypton-hackathon0/hackathon/issues/115)
 
 - **Buy Me A Coffee button**
 
@@ -97,13 +97,13 @@ You can preview the README too.
 1. Clone the repository
 
 ```bash
-git clone https://github.com/rahuldkjain/github-profile-readme-generator.git
+git clone https://github.com/krypton-hackathon0/hackathon.git
 ```
 
 2. Change the working directory
 
 ```bash
-cd github-profile-readme-generator
+cd src
 ```
 
 3. Install dependencies
@@ -122,7 +122,7 @@ npm start
 
 ## 🍰 Contributing
 
-Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and [open a pull request](https://github.com/rahuldkjain/github-profile-readme-generator/compare).
+Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and [open a pull request](https://github.com/krypton-hackathon0/hackathon/compare).
 
 Please read [`CONTRIBUTING`](CONTRIBUTING.md) for details on our [`CODE OF CONDUCT`](CODE_OF_CONDUCT.md), and the process for submitting pull requests to us.
 
@@ -141,17 +141,10 @@ Please read [`CONTRIBUTING`](CONTRIBUTING.md) for details on our [`CODE OF CONDU
 - [Julien Monty](https://github.com/konpa) for super useful [devicon](https://github.com/konpa/devicon)
 - [Eliot Sanford](https://github.com/techieeliot) for adding hashnode as a blog input
 
-## 🙇 Sponsors
-
-- [Scott C Wilson](https://github.com/scottcwilson) donated the first-ever grant to this tool. A big thanks to him.
-- [Max Schmitt](https://github.com/mxschmitt) loved the tool and showed support with his donation. Thanks a lot.
-- [Aadit Kamat](https://github.com/aaditkamat) find the tool useful and showed support with his donation. A big thanks to him.
-- [Jean-Michel Fayard](https://github.com/jmfayard) used the generator to create his GitHub Profile README and he loved it. Thanks to him for showing support to the tool with the donation.
-
 ## 🙏 Support
 
 <p align="left">
-<a href="https://www.paypal.me/radokdev"><img src="https://ionicabizau.github.io/badges/paypal.svg" alt="sponsor github profile readme generator"/>
+<a href="https://www.paypal.me/radondev"><img src="https://ionicabizau.github.io/badges/paypal.svg" alt="sponsor github profile readme generator"/>
 </a>
 <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Frahuldkjain.github.io%2Fgithub-profile-readme-generator">
 <img src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Frahuldkjain.github.io%2Fgithub-profile-readme-generator" alt="tweet github profile readme generator"/>
