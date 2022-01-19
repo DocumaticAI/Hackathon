@@ -1,0 +1,8 @@
+[tool.documatic]
+name="businesstemplates"
+docdir="."
+srcdir="src/businesstemplates"
+
+[tool.doculog]
+changelog="CHANGELOG"
+project="businesstemplates"

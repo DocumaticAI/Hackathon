@@ -1,0 +1,10 @@
+dist
+colorconverters.egg-info
+build
+*.egg-info
+venv
+.venv
+.idea/
+.vs/slnx.sqlite
+env/
+test.py
