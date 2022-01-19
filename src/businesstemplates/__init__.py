@@ -12,7 +12,7 @@ __title__ = "businesstemplates"
 __author__ = "That GenZ Gamer"
 __license__ = "MIT"
 __copyright__ = "Copyright 2022 (c) That GenZ Gamer"
-__version__ = "0.2.1"
+__version__ = "1.0.0"
 
 from .resume_generator import *
 from .business_card_generator import *
