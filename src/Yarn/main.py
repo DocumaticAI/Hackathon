@@ -14,6 +14,7 @@ from Functions.Miscellaneous.OpenGoogle import OpenGoogle
 from Functions.Miscellaneous.OpenYoutube import OpenYoutube
 from Functions.Miscellaneous.CurrentTime import CurrentTime
 from Functions.Miscellaneous.TellmeaJoke import TellmeaJoke
+from Functions.Miscellaneous.WikipediaSearch import WikipediaSearch
 
 # Greet Function
 try:
@@ -69,6 +70,12 @@ while True:
             elif "play on youtube" in command:
                 try:
                     YouTubePlay()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "wikipedia" in command:
+                try:
+                    WikipediaSearch()
                 except KeyboardInterrupt:
                     sys.exit()
 
