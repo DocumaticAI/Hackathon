@@ -33,12 +33,14 @@ module.exports = {
 
 		if (!member.moderatable)
 			return await interaction.reply({
-				embeds: [new MessageEmbed().setColor('RED').setDescription("I can't timeout them.")]
+				embeds: [new MessageEmbed().setColor('RED').setDescription(`${bot.config.emotes.fail} I can't timeout them.`)]
 			});
 
 		if (member.id === interaction.user.id)
 			return await interaction.reply({
-				embeds: [new MessageEmbed().setColor('RED').setDescription("You can't timeout yourself.")]
+				embeds: [
+					new MessageEmbed().setColor('RED').setDescription(`${bot.config.emotes.fail} You can't timeout yourself.`)
+				]
 			});
 
 		const confirmation = await confirm(

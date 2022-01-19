@@ -1,4 +1,3 @@
-const ModerationManager = require('../Managers/ModerationManager');
 const { Client, Collection } = require('discord.js');
 const { connect } = require('mongoose');
 const { search } = require('./Utils');
@@ -10,7 +9,6 @@ module.exports = class Bot extends Client {
 		super(config.botOptions);
 		this.config = config;
 		this.commands = new Collection();
-		this.moderation = new ModerationManager(this);
 		this.logger = consola;
 	}
 

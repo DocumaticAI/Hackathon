@@ -74,7 +74,9 @@ module.exports = {
 		collector.on('collect', async i => {
 			if (i.user.id !== interaction.user.id)
 				return await i.reply({
-					embeds: [new MessageEmbed().setColor('RED').setDescription("That's not meant for you!")],
+					embeds: [
+						new MessageEmbed().setColor('RED').setDescription(`${bot.config.emotes.fail} That's not meant for you!`)
+					],
 					ephemeral: true
 				});
 			const val = i.values[0];
@@ -125,6 +127,7 @@ module.exports = {
 						.setDescription(
 							`
 **Name:** ${pretty(cmd.name)}
+**Description:** ${cmd.description}
 **Category:** ${cmd.category}
 **Syntax:** ${syntax(cmd)}
         `

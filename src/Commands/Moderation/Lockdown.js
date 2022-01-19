@@ -5,6 +5,11 @@ module.exports = {
 	description: 'Lockdown the server.',
 	category: 'Moderation',
 	async run({ interaction, bot, guild }) {
+		// If you have a main role;
+		// put it below as await guild.roles.fetch('id')
+		// remove sending permissions from @everyone
+		// same for lift-lockdown
+
 		await guild.roles.everyone.setPermissions(role.permissions.remove('SEND_MESSAGES'));
 
 		await interaction.reply({

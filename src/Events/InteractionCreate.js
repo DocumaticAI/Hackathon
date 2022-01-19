@@ -17,7 +17,7 @@ module.exports = {
 			});
 
 		try {
-			await command.run({ interaction, bot, options: interaction.options });
+			await command.run({ interaction, bot, options: interaction.options, guild: interaction.guild });
 		} catch (err) {
 			console.log(err);
 

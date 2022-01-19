@@ -45,6 +45,7 @@ module.exports = {
 			await new Warning({
 				GuildID: interaction.guild.id,
 				WarnID: warnID,
+				UserID: member.id,
 				Reason: reason,
 				Moderator: interaction.user.id
 			}).save();

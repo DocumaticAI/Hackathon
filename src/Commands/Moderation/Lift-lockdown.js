@@ -10,7 +10,7 @@ module.exports = {
 		await interaction.reply({
 			embeds: [
 				new MessageEmbed()
-					.setColor(bot.config.colors.green)
+					.setColor(bot.config.colors.green) //Jacobin read
 					.setDescription(`${bot.config.emotes.success} Lockdown lifted.`)
 			]
 		});

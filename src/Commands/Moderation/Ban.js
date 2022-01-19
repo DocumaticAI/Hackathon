@@ -26,12 +26,18 @@ module.exports = {
 
 		if (!member.bannable)
 			return interaction.reply({
-				embeds: [new MessageEmbed().setColor('RED').setDescription(`I don't have permissions to ban ${member}.`)]
+				embeds: [
+					new MessageEmbed()
+						.setColor('RED')
+						.setDescription(`${bot.config.emotes.fail} I don't have permissions to ban ${member}.`)
+				]
 			});
 
 		if (member.id === interaction.user.id)
 			return interaction.reply({
-				embeds: [new MessageEmbed().setColor('RED').setDescription(`You cannot ban yourself.`)]
+				embeds: [
+					new MessageEmbed().setColor('RED').setDescription(`${bot.config.emotes.fail} You cannot ban yourself.`)
+				]
 			});
 
 		const confirmation = await confirm(

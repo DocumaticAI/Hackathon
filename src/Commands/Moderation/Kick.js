@@ -26,11 +26,18 @@ module.exports = {
 
 		if (!user.kickable)
 			return interaction.reply({
-				embeds: [new MessageEmbed().setColor('RED').setDescription(`I don't have permissions to kick ${user}.`)]
+				embeds: [
+					new MessageEmbed()
+						.setColor('RED')
+						.setDescription(`${bot.config.emotes.fail} I don't have permissions to kick ${user}.`)
+				]
 			});
+
 		if (user.id === interaction.user.id)
 			return interaction.reply({
-				embeds: [new MessageEmbed().setColor('RED').setDescription(`You cannot kick yourself.`)]
+				embeds: [
+					new MessageEmbed().setColor('RED').setDescription(`${bot.config.emotes.fail} You cannot kick yourself.`)
+				]
 			});
 
 		const confirmation = await confirm(
