@@ -1,3 +1,4 @@
+.env
 *.png
 test.py
 Config.py

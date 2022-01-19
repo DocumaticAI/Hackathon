@@ -1,0 +1,4 @@
+[tool.documatic]
+name = "Yarn"
+docdir = "src/Yarn/docs"
+srcdir = "src/Yarn"
