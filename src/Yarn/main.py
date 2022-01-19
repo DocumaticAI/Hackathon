@@ -27,8 +27,8 @@ from Functions.Miscellaneous.GetQuote import GetQuote
 from Functions.Miscellaneous.AirQuality import GetAQI
 from Functions.Miscellaneous.GetAdvice import GetAdvice
 from Functions.Miscellaneous.OpenGoogle import OpenGoogle
-from Functions.Miscellaneous.OpenYoutube import OpenYoutube
 from Functions.Miscellaneous.PasswordGen import PasswordGen
+from Functions.Miscellaneous.OpenYoutube import OpenYoutube
 from Functions.Miscellaneous.CurrentTime import CurrentTime
 from Functions.Miscellaneous.TellmeaJoke import TellmeaJoke
 from Functions.Miscellaneous.SendWhatsappMsg import SendWhatsappMsg

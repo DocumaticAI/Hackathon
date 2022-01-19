@@ -6,3 +6,32 @@
 [![license](https://nuggies.js.org/assets/img/license.ade17f5e.svg)](https://github.com/sujalgoel/yarn/blob/master/LICENSE)
 
 > Yarn is a speech assistant written in **python** with **hard-coded features.**
+
+
+| Serial No. |     Name    |                    Description                    |
+|:----------:|:-----------:|:-------------------------------------------------:|
+|      1     | Open Google | Opens https://google.com/ in your default browser.|
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
+|            |             |                                                   |
