@@ -10,6 +10,7 @@ from Functions.GTN import GTN
 from Functions.Greet import Greet
 from Functions.Trivia import Trivia
 from Functions.Weather import Weather
+from Functions.ChatBot import ChatBot
 from Functions.SetAlarm import SetAlarm
 from Functions.PlaySong import PlaySong
 from Functions.SendEmail import SendEmail
@@ -189,6 +190,12 @@ while True:
             elif "trivia" in command:
                 try:
                     Trivia()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "chatbot" in command:
+                try:
+                    ChatBot()
                 except KeyboardInterrupt:
                     sys.exit()
 
