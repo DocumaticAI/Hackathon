@@ -3,10 +3,10 @@ businesstemplates
 
 .. image:: https://img.shields.io/pypi/v/businesstemplates.svg
    :target: https://pypi.python.org/pypi/businesstemplates
-   :alt: PyPI Version Info
+   :alt: PyPI version info
 .. image:: https://img.shields.io/pypi/pyversions/businesstemplates.svg
    :target: https://pypi.python.org/pypi/businesstemplates
-   :alt: PyPI Supported Python Versions
+   :alt: PyPI supported Python versions
 
 An efficient command line tool to create resumes and business cards on the go!
 
@@ -27,11 +27,11 @@ Installing this module is quite simple,
 
 .. code:: sh
 
-	# Linux/MacOS
-	python3 -m pip install -U businesstemplates
+    # Linux/macOS
+    python3 -m pip install -U businesstemplates
 
-	# Windows
-	py -3 -m pip install -U businesstemplates
+    # Windows
+    py -3 -m pip install -U businesstemplates
 
 Other Required Packages
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,7 +51,7 @@ Open your favourite terminal and enter this
 
 .. code:: sh
 
-	resume_generator
+	 resume_generator
 
 Enter the information through the inputs and you're done!
 
@@ -63,7 +63,8 @@ Design your sparkling business card in just under a minute.
 Open your favourite terminal and enter this
 
 .. code:: sh
-	business_card_generator
+
+	 business_card_generator
 
 Enter the information through the inputs and you're done!
 

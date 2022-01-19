@@ -1,1 +1,1 @@
-global-include *.txt *.md *.py *.docx *.jpg *.png *.cfg *.toml *.rst
+global-include *.txt *.py *.docx *.jpg *.png *.cfg *.rst
