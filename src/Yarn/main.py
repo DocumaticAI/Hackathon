@@ -6,6 +6,7 @@ import sys
 from Functions.Greet import Greet
 from Functions.Weather import Weather
 from Functions.PlaySong import PlaySong
+from Functions.SendEmail import SendEmail
 from Functions.YouTubePlay import YouTubePlay
 from Functions.ProjectBase import takeCommand
 from Functions.GoogleSearch import GoogleSearch
@@ -21,6 +22,7 @@ from Functions.Miscellaneous.OpenGoogle import OpenGoogle
 from Functions.Miscellaneous.OpenYoutube import OpenYoutube
 from Functions.Miscellaneous.CurrentTime import CurrentTime
 from Functions.Miscellaneous.TellmeaJoke import TellmeaJoke
+from Functions.Miscellaneous.SendWhatsappMsg import SendWhatsappMsg
 from Functions.Miscellaneous.WikipediaSearch import WikipediaSearch
 
 # Greet Function
@@ -121,6 +123,18 @@ while True:
             elif "quote" in command:
                 try:
                     GetQuote()
+                except KeyboardInterrupt:
+                    sys.exit()
+            
+            elif "whatsapp" in command:
+                try:
+                    SendWhatsappMsg()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "email" in command:
+                try:
+                    SendEmail()
                 except KeyboardInterrupt:
                     sys.exit()
 
