@@ -1,1 +1,4 @@
+*.png
+test.py
+Config.py
 __pycache__

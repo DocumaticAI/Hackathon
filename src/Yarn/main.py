@@ -3,6 +3,7 @@ import sys
 
 # Regular Functions
 from Functions.Greet import Greet
+from Functions.Weather import Weather
 from Functions.YouTubePlay import YouTubePlay
 from Functions.ProjectBase import takeCommand
 from Functions.GoogleSearch import GoogleSearch
@@ -11,6 +12,7 @@ from Functions.NewsHeadlines import NewsHeadlines
 
 # Miscellaneous Functions
 from Functions.Miscellaneous.Quit import Quit
+from Functions.Miscellaneous.AirQuality import GetAQI
 from Functions.Miscellaneous.OpenGoogle import OpenGoogle
 from Functions.Miscellaneous.OpenYoutube import OpenYoutube
 from Functions.Miscellaneous.CurrentTime import CurrentTime
@@ -83,6 +85,18 @@ while True:
             elif "news" in command:
                 try:
                     NewsHeadlines()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "weather" in command:
+                try:
+                    Weather()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "air quality" in command:
+                try:
+                    GetAQI()
                 except KeyboardInterrupt:
                     sys.exit()
 
