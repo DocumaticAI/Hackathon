@@ -14,7 +14,7 @@ const Recent = () => {
             <br />
             <br />
             <h1>Recent Rooms</h1>
-            <select id="select" disabled={!recentRooms} onChange={change} className="form-select form-sleect-lg">
+            <select id="select" disabled={!recentRooms} onChange={change} className="form-select">
                 <option>{!recentRooms ? 'No recent rooms to display' : 'Choose a Room'}</option>
                 {recentRooms ? recentRooms.map(room => {
                     return <option key={room} onClick={() => console.log(room)} value={room}>{room}</option>
