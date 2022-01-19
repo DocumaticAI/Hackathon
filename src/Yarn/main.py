@@ -14,7 +14,9 @@ from Functions.NewsHeadlines import NewsHeadlines
 
 # Miscellaneous Functions
 from Functions.Miscellaneous.Quit import Quit
+from Functions.Miscellaneous.GetQuote import GetQuote
 from Functions.Miscellaneous.AirQuality import GetAQI
+from Functions.Miscellaneous.GetAdvice import GetAdvice
 from Functions.Miscellaneous.OpenGoogle import OpenGoogle
 from Functions.Miscellaneous.OpenYoutube import OpenYoutube
 from Functions.Miscellaneous.CurrentTime import CurrentTime
@@ -107,6 +109,18 @@ while True:
             elif "play a song" in command:
                 try:
                     PlaySong()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "advice" in command:
+                try:
+                    GetAdvice()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "quote" in command:
+                try:
+                    GetQuote()
                 except KeyboardInterrupt:
                     sys.exit()
 
