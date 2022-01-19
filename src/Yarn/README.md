@@ -37,5 +37,5 @@
 |     22     |        Lie Catcher       | Tell, if the statement given by Yarn is Truth or lie? |
 |     23     |          Trivia          |             Play a simple game of trivia.             |
 |     24     |          ChatBot         |             Chat with Yarn through Voice.             |
-|     26     |           Help           |       Open's this page in your default browser.       |
-|     25     |         Shutdown         |                     Shutdown Yarn.                    |
+|     25     |           Help           |       Open's this page in your default browser.       |
+|     26     |         Shutdown         |                     Shutdown Yarn.                    |
