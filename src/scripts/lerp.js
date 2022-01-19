@@ -15,7 +15,13 @@ class Lerp {
     
     update(timeDelta) {
         const t = this.time / this.delay;
-        this.value = (1 - t) * this.from + t * this.to;
+        if (typeof this.value === 'number')
+          this.value = (1 - t) * this.from + t * this.to;
+        else if (typeof this.value === 'object') {
+          for (const k of Object.keys(this.value)) {
+            this.value[k] = (1 - t) * this.from[k] + t * this.to[k];
+          }
+        }
         this.time += timeDelta * this.lerpSpeed;
 
         if (this.onupdate)

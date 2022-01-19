@@ -47,6 +47,9 @@ class Game {
 
       if (this.rotationLerp !== null)
         this.rotationLerp.update(timeDelta);
+      
+      if (this.cameraLerp !== null)
+        this.cameraLerp.update(timeDelta);
   
       this.translateX += this.speedX * -0.05;
   
@@ -69,6 +72,7 @@ class Game {
     this.score = 0;
 
     this.rotationLerp = null;
+    this.cameraLerp = null;
 
     // show initial values
     this.divScore.innerText = this.score;
@@ -111,6 +115,8 @@ class Game {
   }
 
   _updateGrid() {
+      this.speedZ += 0.002;
+      this.grid.material.uniforms.speedZ.value = this.speedZ;
       this.grid.material.uniforms.time.value = this.time;
       this.objectsParent.position.z = this.speedZ * this.time;
 
@@ -153,6 +159,11 @@ class Game {
         ) {
           const params = [child, -this.translateX, -this.objectsParent.position.z];
           if (child.userData.type === 'obstacle') {
+            this._shakeCamera({
+              x: this.camera.position.x,
+              y: this.camera.position.y,
+              z: this.camera.position.z,
+            });
             this.health -= 10;
             this.divHealth.value = this.health;
             this._setupObstacle(...params);
@@ -160,6 +171,7 @@ class Game {
               this._gameOver();
           }
           else {
+            this._createScorePopup(child.userData.price);
             this.score += child.userData.price;
             this.divScore.innerText = this.score;
             child.userData.price = this._setupBonus(...params);
@@ -275,7 +287,6 @@ class Game {
         varying vec3 vColor;
       
         void main() {
-          vColor = color;
           float limLen = gridLimits.y - gridLimits.x;
           vec3 pos = position;
           if (floor(moveableX + 0.5) > 0.5) { // if a point has "moveableX" attribute = 1 
@@ -288,6 +299,10 @@ class Game {
             float curZPos = mod((pos.z + zDist) - gridLimits.x, limLen) + gridLimits.x;
             pos.z = curZPos;
           }
+
+          // compute the fog-like gradient
+          float k = 1.0 - (-pos.z / 200.0);
+          vColor = color * k;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
         }
       `,
@@ -394,6 +409,53 @@ class Game {
       );
 
       return price;
+    }
+
+    _shakeCamera(initialPosition, remainingShakes = 3) {
+      const $this = this;
+      
+      const startPosition = {
+        x: this.camera.position.x,
+        y: this.camera.position.y,
+        z: this.camera.position.z,
+      };
+  
+      const startOffset = { x: 0, y: 0 };
+      const endOffset = {
+        x: this._randomFloat(-0.25, 0.25),
+        y: this._randomFloat(-0.25, 0.25),
+      };
+      
+      this.cameraLerp = new Lerp(startOffset, endOffset, this._randomFloat(0.1, 0.22))
+        .onUpdate((value) => {
+          $this.camera.position.set(
+            startPosition.x + value.x,
+            startPosition.y + value.y,
+            startPosition.z
+          );
+        })
+        .onFinish(() => {
+          if (remainingShakes > 0) {
+            $this._shakeCamera(initialPosition, remainingShakes - 1);
+          } else {
+            $this.cameraLerp = null;
+            $this.camera.position.set(
+              initialPosition.x,
+              initialPosition.y,
+              initialPosition.z
+            );
+          }
+        });
+    }
+
+    _createScorePopup(score) {
+      const scorePopup = document.createElement('div');
+      scorePopup.innerText = `+${score}`;
+      scorePopup.className = 'score-popup';
+      document.body.appendChild(scorePopup);
+      setTimeout(() => {
+        scorePopup.remove();
+      }, 1000);
     }
 
   _randomFloat(min, max) {
