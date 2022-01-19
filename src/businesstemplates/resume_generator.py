@@ -129,10 +129,21 @@ def main():
 		print("You haven't mentioned a city!")
 		exit()
 
+	# Asking for the user's address
+	address = input("What's your address?: ")
+
+	# Changing the text of the user's address and setting the font size using an helper function.
+	if len(address) != 0:
+		address_cell = information_table.rows[3].cells[0].paragraphs[0]
+
+		change_text(address_cell, f"Address: {address}", 12)
+	else:
+		print("You haven't mentioned an address!")
+
 	# Asking for the user's introduction
 	objective = input("Write your objective to be mentioned in the resume: ")
 
-	# Changing the text of the user's introduction and setting the font size using an helper function.
+	# Changing the text of the user's objective and setting the font size using an helper function.
 	if len(objective) != 0:
 		change_text(document.paragraphs[3], objective, 12)
 	else:
@@ -144,14 +155,14 @@ def main():
 
 	# Asking for the highest qualification
 	highest_qualification = input(
-		"What is your highest qualification? [Employee/Post Graduation/Graduation/Class 12]: "
+		"What is your highest qualification? [Post Graduation/Graduation/Class 12/Class 10]: "
 	).lower()
 
 	qualifications = [
-		"employee", 
 		"post graduation", 
 		"graduation", 
 		"class 12",
+		"class 10",
 	]
 
 	# Exitting if the qualification selected does not exist in options.
@@ -162,131 +173,8 @@ def main():
 	elif len(highest_qualification) == 0:
 		print("You haven't mentioned your highest qualification!")
 	else:
-		# Asking for post graduation, graduation, 12th and 10th details
-		# if the user is an employee.
-		if highest_qualification == "employee":
-			employee_pg_institute = input(
-				"Which institute did you pursue your post graduation in?: "
-			)
-
-			change_text(
-				course_details.columns[1].cells[1].paragraphs[0],
-				employee_pg_institute,
-				12,
-			)
-
-			employee_pg_year = input(
-				"Which year did you complete your post graduation?: "
-			)
-
-			change_text(
-				course_details.columns[2].cells[1].paragraphs[0],
-				employee_pg_year,
-				12,
-			)
-
-			employee_pg_percentage = input(
-				"What was your post graduation percentage obtained?: "
-			)
-
-			change_text(
-				course_details.columns[3].cells[1].paragraphs[0],
-				employee_pg_percentage,
-				12,
-			)
-
-			employee_grad_institute = input(
-				"Which institute did you pursue your graduation in?: "
-			)
-
-			change_text(
-				course_details.columns[1].cells[2].paragraphs[0],
-				employee_grad_institute,
-				12,
-			)
-
-			employee_grad_year = input(
-				"Which year did you complete your graduation?: "
-			)
-
-			change_text(
-				course_details.columns[2].cells[2].paragraphs[0],
-				employee_grad_year,
-				12,
-			)
-
-			employee_grad_percentage = input(
-				"What was your graduation percentage obtained?: "
-			)
-
-			change_text(
-				course_details.columns[3].cells[2].paragraphs[0],
-				employee_grad_percentage,
-				12,
-			)
-
-			employee_12th_institute = input(
-				"Which institute did you pursue your 12th grade in?: "
-			)
-
-			change_text(
-				course_details.columns[1].cells[3].paragraphs[0],
-				employee_12th_institute,
-				12,
-			)
-
-			employee_12th_year = input(
-				"Which year did you complete your 12th grade?: "
-			)
-
-			change_text(
-				course_details.columns[2].cells[3].paragraphs[0],
-				employee_12th_year,
-				12,
-			)
-
-			employee_12th_percentage = input(
-				"What was your 12th grade percentage obtained?: "
-			)
-
-			change_text(
-				course_details.columns[3].cells[3].paragraphs[0],
-				employee_12th_percentage,
-				12,
-			)
-
-			employee_10th_institute = input(
-				"Which institute did you pursue your 10th grade in?: "
-			)
-
-			change_text(
-				course_details.columns[1].cells[4].paragraphs[0],
-				employee_10th_institute,
-				12,
-			)
-
-			employee_10th_year = input(
-				"Which year did you complete your 10th grade?: "
-			)
-
-			change_text(
-				course_details.columns[2].cells[4].paragraphs[0],
-				employee_10th_year,
-				12,
-			)
-
-			employee_10th_percentage = input(
-				"What was your 10th grade percentage obtained?: "
-			)
-
-			change_text(
-				course_details.columns[3].cells[4].paragraphs[0],
-				employee_10th_percentage,
-				12,
-			)
-
 		# Asking for pg, ug, 12th and 10th details if user is an post graduate.
-		elif highest_qualification == "post graduation":
+		if highest_qualification == "post graduation":
 			postgraduate_pg_institute = input(
 				"Which institute did you pursue your post graduation in?: "
 			)
@@ -569,6 +457,49 @@ def main():
 			change_text(
 				course_details.columns[3].cells[4].paragraphs[0],
 				class12_10th_percentage,
+				12,
+			)
+		# Asking for 10th details if user is a 10th grader.
+		elif highest_qualification == "class 10":
+			change_text(course_details.columns[1].cells[1].paragraphs[0], "NA", 12)
+			change_text(course_details.columns[2].cells[1].paragraphs[0], "NA", 12)
+			change_text(course_details.columns[3].cells[1].paragraphs[0], "NA", 12)
+
+			change_text(course_details.columns[1].cells[2].paragraphs[0], "NA", 12)
+			change_text(course_details.columns[2].cells[2].paragraphs[0], "NA", 12)
+			change_text(course_details.columns[3].cells[2].paragraphs[0], "NA", 12)
+
+			change_text(course_details.columns[1].cells[3].paragraphs[0], "NA", 12)
+			change_text(course_details.columns[2].cells[3].paragraphs[0], "NA", 12)
+			change_text(course_details.columns[3].cells[3].paragraphs[0], "NA", 12)
+
+			class10_10th_institute = input(
+				"Which institute did you pursue your 10th grade in?: "
+			)
+
+			change_text(
+				course_details.columns[1].cells[4].paragraphs[0],
+				class10_10th_institute,
+				12,
+			)
+
+			class10_10th_year = input(
+				"Which year did you complete your 10th grade?: "
+			)
+
+			change_text(
+				course_details.columns[2].cells[4].paragraphs[0],
+				class10_10th_year,
+				12,
+			)
+
+			class10_10th_percentage = input(
+				"What was your 10th grade percentage obtained?: "
+			)
+
+			change_text(
+				course_details.columns[3].cells[4].paragraphs[0],
+				class10_10th_percentage,
 				12,
 			)
 		else:

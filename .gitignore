@@ -8,3 +8,4 @@ venv
 .vs/slnx.sqlite
 env/
 test.py
+.env
