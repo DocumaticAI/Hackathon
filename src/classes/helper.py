@@ -1,4 +1,4 @@
-from os.path import join, dirname, abspath, exists, isfile, splitext
+from os.path import join, dirname, abspath, exists, isfile
 from os import mkdir, remove, walk
 from tkinter import Toplevel, Tk, PhotoImage
 from classes.Widgets import Widgets
@@ -128,8 +128,10 @@ class Helper:
     def confirmation(title: str, message: str, cb: callable, root: Tk):
         X_COORD = root.winfo_rootx() - 12
         Y_COORD = 150
+        _width = get_width(message.split("\n"))
+        WIDTH = _width if _width > 300 else 300
 
-        top_confirm = Helper.setup_top(None, title, geometry=f"300x100+{X_COORD}+{Y_COORD}", withdraw=False)
+        top_confirm = Helper.setup_top(None, title, geometry=f"{WIDTH}x100+{X_COORD}+{Y_COORD}", withdraw=False)
 
         top_confirm.bind("<Escape>", lambda e: top_confirm.destroy())
 
@@ -210,3 +212,28 @@ class Helper:
         except:
             Helper.show_error("I either don't have permissions to access this file\n\t or the file does not exist anymore", None)
             return None
+
+
+def get_width(str_list: list) -> int:
+    pad = 50 * 2  # 100px padding.
+
+    length = get_longest_str(str_list, return_length=True)
+    char_length = 6.7  # each character is in fact 6.7 pixels wide.
+
+    return int(length * char_length) + pad
+
+def get_longest_str(str_list: list, **kwargs) -> int:
+    char_count = 0
+    longest = 0
+
+    for index in range(len(str_list)):
+        if len(str_list[index]) > char_count:
+            char_count = len(str_list[index])
+            longest = index
+
+    if kwargs.get("return_str"):
+        return str_list[longest]
+    elif kwargs.get("return_length"):
+        return char_count
+
+    return longest
