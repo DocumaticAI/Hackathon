@@ -52,6 +52,14 @@ class Vector {
       this.z * scalar
     );
   }
+
+  sub(vector){
+    return new Vector(
+      this.x - vector.x,
+      this.y - vector.y,
+      this.z - vector.z
+    );
+  }
 }
 
 function unitVector(vector){

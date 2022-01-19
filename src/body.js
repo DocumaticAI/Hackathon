@@ -36,6 +36,8 @@ class Sphere {
 
 class Donut {
   constructor(r, R, middle){
+    // TODO: rotation
+
     this.r = r;
     this.R = R;
     this.middle = new Point(...middle);
@@ -45,15 +47,11 @@ class Donut {
 
     // formula from
     // my head
-    // (yet wrong)
-    // (will be fixed soon)
 
     P = P.sub(this.middle);
 
-    //const r = this.r;
-    //const R = this.R;
-    const r = 1;
-    const R = 4;
+    const r = this.r;
+    const R = this.R;
 
     const a = U.x ** 4 + U.y ** 4 + U.z ** 4 +
       2 * U.x * U.x * U.y * U.y +
@@ -78,7 +76,13 @@ class Donut {
       (P.x * U.y + U.x * P.y) ** 2 + 2 * P.x * U.x * P.y * U.y +
       (P.x * U.z + U.x * P.z) ** 2 + 2 * P.x * U.x * P.z * U.z +
       (P.z * U.y + U.z * P.y) ** 2 + 2 * P.z * U.z * P.y * U.y
-    ) + 2 * (r * r - R * R) * (U.x * U.x + U.y * U.y + U.z * U.z);
+    ) + 2 * (
+      r * r * (
+        - U.x * U.x - U.y * U.y - U.z * U.z
+      ) + R * R * (
+        - U.x * U.x - U.y * U.y + U.z * U.z
+      )
+    );
 
     const d = 4 * (
       P.x * P.x * P.x * U.x +
@@ -87,7 +91,13 @@ class Donut {
 
       P.x * P.x * P.y * U.y + P.x * U.x * P.y * P.y +
       P.x * P.x * P.z * U.z + P.x * U.x * P.z * P.z +
-      P.z * P.z * P.y * U.y + P.z * U.z * P.y * P.y
+      P.z * P.z * P.y * U.y + P.z * U.z * P.y * P.y +
+
+      r * r * (
+        - P.x * U.x - P.y * U.y - P.z * U.z
+      ) + R * R * (
+        - P.x * U.x - P.y * U.y + P.z * U.z
+      )
     );
 
     const e = P.x * P.x * P.x * P.x +
@@ -97,7 +107,13 @@ class Donut {
         P.x * P.x * P.y * P.y +
         P.x * P.x * P.z * P.z +
         P.z * P.z * P.y * P.y
-      ) + 2 * (r * r - R * R) * (P.x * P.x + P.y * P.y + P.z * P.z);
+      ) + 2 * (
+        r * r * (
+          - P.x * P.x - P.y * P.y - P.z * P.z
+        ) + R * R * (
+          - P.x * P.x - P.y * P.y + P.z * P.z
+        )
+      ) - 2 * R * R * r * r;
 
      const s = solveQuartic(a, b, c, d, e);
      const m = Math.min(...s);
@@ -107,6 +123,12 @@ class Donut {
   }
 
   angle(L, S){
+
+    // TODO: instead of middle take the bigger circle
+
+    L = L.sub(this.middle);
+    S = S.sub(this.middle);
+
     const V = unitVector(L.sub(S));
     const U = unitVector(new Point(0, 0, 0).sub(S));
     const theta = Math.acos(V.dot(U) / (V.a * U.a));

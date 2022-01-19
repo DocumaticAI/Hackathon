@@ -2,14 +2,15 @@ const { Sphere, Donut } = require("./body.js");
 const { eq, unitVector, Point, Vector } = require("./math.js");
 
 const light = {
-  "from": [10, 10, 0],
+  "from": [10, 10, 10],
   "power": 15
 };
 
 const screen = [30, 30];
 const state = ".,-~+^*!:;?=%&@#"; // 0 - 15
 
-const body = new Sphere([0, 0, 10], 10);
+const body = new Donut(6, 9, [0, 0, 30]);
+//const body = new Sphere([0, 0, 20], 12);
 render();
 
 function render(){
@@ -25,6 +26,7 @@ function render(){
 
       if(!d) row.push(" ");
       else {
+
         //row.push(state[15]);
 
         const S1 = P.add(U.mul(t));
