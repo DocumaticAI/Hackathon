@@ -1,0 +1,23 @@
+{
+  "name": "acol",
+  "version": "1.0.0",
+  "description": "yes",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node e.js",
+    "start": "set DEBUG=* & node src/index.js",
+    "lint": "eslint src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.8.0",
+    "dotenv": "^10.0.0",
+    "eris": "^0.16.1",
+    "eslint": "^8.6.0",
+    "glob": "^7.2.0",
+    "mongoose": "^6.0.14",
+    "ms": "^2.1.3"
+  }
+}
