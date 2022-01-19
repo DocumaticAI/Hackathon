@@ -1,0 +1,4 @@
+BinaryPFP/__pycache__
+BinaryPFP/src/__pycache__
+.env
+pyproject.toml
