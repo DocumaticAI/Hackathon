@@ -8,10 +8,12 @@ from Functions.RPS import RPS
 from Functions.GTP import GTP
 from Functions.GTN import GTN
 from Functions.Greet import Greet
+from Functions.Trivia import Trivia
 from Functions.Weather import Weather
-from Functions.PlaySong import PlaySong
 from Functions.SetAlarm import SetAlarm
+from Functions.PlaySong import PlaySong
 from Functions.SendEmail import SendEmail
+from Functions.LieSwatter import LieSwatter
 from Functions.YouTubePlay import YouTubePlay
 from Functions.ProjectBase import takeCommand
 from Functions.GoogleSearch import GoogleSearch
@@ -175,6 +177,18 @@ while True:
             elif "guess the number" in command:
                 try:
                     GTN()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "lie catcher" in command:
+                try:
+                    LieSwatter()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "trivia" in command:
+                try:
+                    Trivia()
                 except KeyboardInterrupt:
                     sys.exit()
 
