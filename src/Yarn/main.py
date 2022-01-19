@@ -6,6 +6,7 @@ import time
 # Regular Functions
 from Functions.RPS import RPS
 from Functions.GTP import GTP
+from Functions.GTN import GTN
 from Functions.Greet import Greet
 from Functions.Weather import Weather
 from Functions.PlaySong import PlaySong
@@ -168,6 +169,12 @@ while True:
             elif "guess the pokemon" in command:
                 try:
                     GTP()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "guess the number" in command:
+                try:
+                    GTN()
                 except KeyboardInterrupt:
                     sys.exit()
 
