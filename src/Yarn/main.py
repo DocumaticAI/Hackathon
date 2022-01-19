@@ -1,11 +1,13 @@
 # Regular import
 import os
 import sys
+import time
 
 # Regular Functions
 from Functions.Greet import Greet
 from Functions.Weather import Weather
 from Functions.PlaySong import PlaySong
+from Functions.SetAlarm import SetAlarm
 from Functions.SendEmail import SendEmail
 from Functions.YouTubePlay import YouTubePlay
 from Functions.ProjectBase import takeCommand
@@ -20,6 +22,7 @@ from Functions.Miscellaneous.AirQuality import GetAQI
 from Functions.Miscellaneous.GetAdvice import GetAdvice
 from Functions.Miscellaneous.OpenGoogle import OpenGoogle
 from Functions.Miscellaneous.OpenYoutube import OpenYoutube
+from Functions.Miscellaneous.PasswordGen import PasswordGen
 from Functions.Miscellaneous.CurrentTime import CurrentTime
 from Functions.Miscellaneous.TellmeaJoke import TellmeaJoke
 from Functions.Miscellaneous.SendWhatsappMsg import SendWhatsappMsg
@@ -135,6 +138,19 @@ while True:
             elif "email" in command:
                 try:
                     SendEmail()
+                except KeyboardInterrupt:
+                    sys.exit()
+                    
+            elif "password" in command:
+                try:
+                    PasswordGen()
+                except KeyboardInterrupt:
+                    sys.exit()
+                    
+            elif "alarm" in command:
+                try:
+                    SetAlarm()
+                    time.sleep(1.3)
                 except KeyboardInterrupt:
                     sys.exit()
 
