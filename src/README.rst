@@ -25,7 +25,7 @@ Installing
 
 Installing this module is quite simple,
 
-... code:: sh
+.. code:: sh
 
 	# Linux/MacOS
 	python3 -m pip install -U businesstemplates
@@ -49,7 +49,7 @@ Now you can design your own impressive resume
 
 Open your favourite terminal and enter this
 
-... code:: sh
+.. code:: sh
 
 	resume_generator
 
@@ -62,7 +62,7 @@ Design your sparkling business card in just under a minute.
 
 Open your favourite terminal and enter this
 
-... code:: sh
+.. code:: sh
 	business_card_generator
 
 Enter the information through the inputs and you're done!
