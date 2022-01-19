@@ -14,24 +14,20 @@ So... I made something along the lines of a "notepad" in python.
 
 ## Installation
 
-TBC...
+To install the application, you'll need to install the [application](application/main) directory. mainly the "main" folder.
+
+and to launch the application all you need to do is launch the **"main.exe"** file.
 
 ## Features
 
 Everything is pretty self-explanatory when it comes to this app.
 
-* You can import an existing file into the app.
-* You can create files to edit with custom extensions. (.txt) being the default, 
-within the app.
-
+* You can import an existing file into the app. (Only .txt supported)
+* You can create files within the app. (creates ".txt" files)
 * You can delete multiple files at once. making it simple to organize your files.
 * there is a small text editor that you can use to edit the files.
 * there is a password system inplace to protect your files.
-***
-<h2> Incoming features </h2>
-
 * You can rename files.
-* You can copy files.
 
 ## Pull requests
 
