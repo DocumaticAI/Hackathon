@@ -22,6 +22,7 @@ from Functions.YouTubeSearch import YouTubeSearch
 from Functions.NewsHeadlines import NewsHeadlines
 
 # Miscellaneous Functions
+from Functions.Miscellaneous.Help import Help
 from Functions.Miscellaneous.Quit import Quit
 from Functions.Miscellaneous.GetQuote import GetQuote
 from Functions.Miscellaneous.AirQuality import GetAQI
@@ -196,6 +197,12 @@ while True:
             elif "chatbot" in command:
                 try:
                     ChatBot()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "help" in command:
+                try:
+                    Help()
                 except KeyboardInterrupt:
                     sys.exit()
 
