@@ -71,7 +71,7 @@ function unitVector(vector){
 }
 
 function eq(a, b){
-  return Math.round(a * 1000) == Math.round(b * 1000);
+  return Math.abs(a - b) < 0.5;
 }
 
 
@@ -83,16 +83,16 @@ function solveQuartic(a, b, c, d, e){
     (c * b * b) / (16 * a * a * a) - (b * d) / (4 * a * a) + e / a;
   if(beta == 0){
     const x1 = - b / (4 * a) + Math.sqrt(
-      ( - alpha + Math.sqrt(alpha ** 2 - 4 * gamma)) / 2
+      (- alpha + Math.sqrt(alpha ** 2 - 4 * gamma)) / 2
     );
     const x2 = - b / (4 * a) + Math.sqrt(
-      ( - alpha - Math.sqrt(alpha ** 2 - 4 * gamma)) / 2
+      (- alpha - Math.sqrt(alpha ** 2 - 4 * gamma)) / 2
     );
     const x3 = - b / (4 * a) - Math.sqrt(
-      ( - alpha + Math.sqrt(alpha ** 2 - 4 * gamma)) / 2
+      (- alpha + Math.sqrt(alpha ** 2 - 4 * gamma)) / 2
     );
     const x4 = - b / (4 * a) - Math.sqrt(
-      ( - alpha - Math.sqrt(alpha ** 2 - 4 * gamma)) / 2
+      (- alpha - Math.sqrt(alpha ** 2 - 4 * gamma)) / 2
     );
     return [x1, x2, x3, x4].filter(x => !isNaN(x));
   }
@@ -105,17 +105,21 @@ function solveQuartic(a, b, c, d, e){
   const y = - (5 * alpha) / 6 + (U ? (U - P / (3 * U)) : (- Math.cbrt(Q)));
   const W = Math.sqrt(alpha + 2 * y);
 
+  /*if(W == 0){
+    console.log("== Here W becomes 0! Should not happen! ==", alpha, U, P);
+  }*/
+
   const x1 = - b / (4 * a) + (
-    + W + Math.sqrt(-(3 * alpha + 2 * y + (2 * beta) / W))
+    + W + Math.sqrt(- (3 * alpha + 2 * y + (2 * beta) / W))
   ) / 2;
   const x2 = - b / (4 * a) + (
-    - W + Math.sqrt(-(3 * alpha + 2 * y - (2 * beta) / W))
+    - W + Math.sqrt(- (3 * alpha + 2 * y - (2 * beta) / W))
   ) / 2;
   const x3 = - b / (4 * a) + (
-    + W - Math.sqrt(-(3 * alpha + 2 * y + (2 * beta) / W))
+    + W - Math.sqrt(- (3 * alpha + 2 * y + (2 * beta) / W))
   ) / 2;
   const x4 = - b / (4 * a) + (
-    - W - Math.sqrt(-(3 * alpha + 2 * y - (2 * beta) / W))
+    - W - Math.sqrt(- (3 * alpha + 2 * y - (2 * beta) / W))
   ) / 2;
 
   return [x1, x2, x3, x4].filter(x => !isNaN(x));

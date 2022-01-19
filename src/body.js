@@ -36,11 +36,13 @@ class Sphere {
 
 class Donut {
   constructor(r, R, middle){
-    // TODO: rotation
 
     this.r = r;
     this.R = R;
     this.middle = new Point(...middle);
+
+    //this.yaw = Math.PI * 2 * 0.01;
+    this.yaw = 0;
   }
 
   intersect(P, U){
@@ -49,6 +51,14 @@ class Donut {
     // my head
 
     P = P.sub(this.middle);
+
+    const Px = P.x * Math.cos(this.yaw) - P.z * Math.sin(this.yaw);
+    P.z = P.x * Math.sin(this.yaw) + P.z * Math.cos(this.yaw);
+    P.x = Px;
+
+    const Ux = U.x * Math.cos(this.yaw) - U.z * Math.sin(this.yaw);
+    U.z = U.x * Math.sin(this.yaw) + U.z * Math.cos(this.yaw);
+    U.x = Ux;
 
     const r = this.r;
     const R = this.R;
@@ -117,6 +127,10 @@ class Donut {
 
      const s = solveQuartic(a, b, c, d, e);
      const m = Math.min(...s);
+
+     /*if(x == 0)
+       console.log(a, b, c, d, e, s);*/
+
      if((s.length == 0) || (m < 0)) return [false, null];
      else return [true, m];
 
@@ -124,14 +138,32 @@ class Donut {
 
   angle(L, S){
 
-    // TODO: instead of middle take the bigger circle
-
     L = L.sub(this.middle);
     S = S.sub(this.middle);
 
+    const Lx = L.x * Math.cos(this.yaw) - L.z * Math.sin(this.yaw);
+    L.z = L.x * Math.sin(this.yaw) + L.z * Math.cos(this.yaw);
+    L.x = Lx;
+
+    const Sx = S.x * Math.cos(this.yaw) - S.z * Math.sin(this.yaw);
+    S.z = S.x * Math.sin(this.yaw) + S.z * Math.cos(this.yaw);
+    S.x = Sx;
+
+    const Z = new Point(0, 0, 0);
+    const P = new Point(S.x, S.y, 0);
+    const M = unitVector(P.sub(Z));
+    const R = this.R;
+
+    const a = M.x * M.x + M.y * M.y;
+    const b = 2 * M.x + 2 * M.y;
+    const c = - R * R;
+    const t = (- b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+    const Y = new Point(M.x * t, M.y * t, 0);
+
     const V = unitVector(L.sub(S));
-    const U = unitVector(new Point(0, 0, 0).sub(S));
+    const U = unitVector(Y.sub(S));
     const theta = Math.acos(V.dot(U) / (V.a * U.a));
+
     return theta;
   }
 }
