@@ -1,6 +1,6 @@
 # Notepad Plus Technical Documentation
 
-**Last updated:** 2022-01-18\
+**Last updated:** 2022-01-19\
 _Document generation aided by **Documatic**_
 
 <SHORT PROJECT DESCRIPTION>
@@ -30,7 +30,7 @@ The outline of this document was generated
 
 ## Code Overview
 
-The codebase has a single-depth folder structure, with 1953 in total.
+The codebase has a single-depth folder structure, with 1955 in total.
 <!---Documatic-section-helloworld: setup-start--->
 The codebase is compatible with Python 3.10 and above, because of pipe type hint in C:\Every Single Thing\Python\Hackathon\src\application\main\classes\helper.py.
 Install from pypi with `pip install src`.
@@ -89,9 +89,81 @@ No CI/CD config files were detected.
 
 No files in `classes/` import local package files.
 
+<!---Documatic-section-file: src\application\main\classes\editmenu.py--->
+
+### editmenu.py
+
+
+File has 87 lines added and 0 lines removed
+                in the past 4 weeks. TakenKills <dragonagario2@gmail.com> is the inferred code owner.
+
+
+<!---Documatic-section-file: src\application\main\classes\Editor.py--->
+
+### Editor.py
+
+
+File has 98 lines added and 0 lines removed
+                in the past 4 weeks. TakenKills <dragonagario2@gmail.com> is the inferred code owner.
+
+
+<!---Documatic-section-file: src\application\main\classes\helper.py--->
+
+### helper.py
+
+
+File has 239 lines added and 0 lines removed
+                in the past 4 weeks. TakenKills <dragonagario2@gmail.com> is the inferred code owner.
+
+
+<!---Documatic-section-file: src\application\main\classes\master.py--->
+
+### master.py
+
+
+File has 225 lines added and 0 lines removed
+                in the past 4 weeks. TakenKills <dragonagario2@gmail.com> is the inferred code owner.
+
+
+<!---Documatic-section-file: src\application\main\classes\password.py--->
+
+### password.py
+
+
+File has 112 lines added and 0 lines removed
+                in the past 4 weeks. TakenKills <dragonagario2@gmail.com> is the inferred code owner.
+
+
+<!---Documatic-section-file: src\application\main\classes\view_file.py--->
+
+### view_file.py
+
+
+File has 91 lines added and 0 lines removed
+                in the past 4 weeks. TakenKills <dragonagario2@gmail.com> is the inferred code owner.
+
+
+<!---Documatic-section-file: src\application\main\classes\Widgets.py--->
+
+### Widgets.py
+
+
+File has 81 lines added and 0 lines removed
+                in the past 4 weeks. TakenKills <dragonagario2@gmail.com> is the inferred code owner.
+
+
 #### classes/
 
 No files in `classes/` import local package files.
+
+<!---Documatic-section-file: src\classes\editmenu.py--->
+
+### editmenu.py
+
+
+File has 87 lines added and 0 lines removed
+                in the past 4 weeks. TakenKills <dragonagario2@gmail.com> is the inferred code owner.
+
 
 <!---Documatic-section-file: src\classes\Editor.py--->
 
@@ -107,7 +179,7 @@ File has 99 lines added and 1 lines removed
 ### helper.py
 
 
-File has 272 lines added and 61 lines removed
+File has 327 lines added and 88 lines removed
                 in the past 4 weeks. TakenKills <dragonagario2@gmail.com> is the inferred code owner.
 
 
@@ -116,7 +188,7 @@ File has 272 lines added and 61 lines removed
 ### master.py
 
 
-File has 320 lines added and 111 lines removed
+File has 379 lines added and 154 lines removed
                 in the past 4 weeks. TakenKills <dragonagario2@gmail.com> is the inferred code owner.
 
 
@@ -125,7 +197,7 @@ File has 320 lines added and 111 lines removed
 ### password.py
 
 
-File has 175 lines added and 64 lines removed
+File has 178 lines added and 66 lines removed
                 in the past 4 weeks. TakenKills <dragonagario2@gmail.com> is the inferred code owner.
 
 
