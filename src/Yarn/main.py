@@ -1,9 +1,11 @@
 # Regular import
+import os
 import sys
 
 # Regular Functions
 from Functions.Greet import Greet
 from Functions.Weather import Weather
+from Functions.PlaySong import PlaySong
 from Functions.YouTubePlay import YouTubePlay
 from Functions.ProjectBase import takeCommand
 from Functions.GoogleSearch import GoogleSearch
@@ -22,6 +24,8 @@ from Functions.Miscellaneous.WikipediaSearch import WikipediaSearch
 # Greet Function
 try:
     Greet()
+    if not os.path.exists('Music'):
+        os.makedirs('Music')
 except KeyboardInterrupt:
     sys.exit()
 
@@ -97,6 +101,12 @@ while True:
             elif "air quality" in command:
                 try:
                     GetAQI()
+                except KeyboardInterrupt:
+                    sys.exit()
+
+            elif "play a song" in command:
+                try:
+                    PlaySong()
                 except KeyboardInterrupt:
                     sys.exit()
 
