@@ -13,8 +13,20 @@
 </head>
 <body>
   <div id="info">
-    <div id="health"></div>
-    <div id="score"></div>
+    <div id="title">Captain's log</div>
+    <div class="divider"></div>
+    <div id="score-row">Score: <div id="score"></div></div>
+    <div id="distance-row">Distance: <div id="distance"></div></div>
+    <div class="divider"></div>
+    <div>Ship's Integrity:</div>
+    <input id="health" type="range" min="0" max="100" disabled>
+  </div>
+
+  <div id="intro-panel">
+    <div id="intro-column">
+      <div id="intro-title">Rush!</div>
+      <button id="start-button">Start</button>
+    </div>
   </div>
 </body>
 </html>
