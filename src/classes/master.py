@@ -4,7 +4,7 @@ from tkinter.ttk import Frame
 from classes.helper import Helper
 from classes.view_file import ViewFile
 from classes.Widgets import Widgets
-from classes.Editor import Editor
+from classes.editmenu import EditMenu
 
 class Master:
     def __init__(self, root: Tk):
@@ -34,7 +34,7 @@ class Master:
 
         self.list_scrollbar = Widgets.create_scrollbar(self.list_frame, orient="vertical")
 
-        self.list_box = Widgets.create_listbox(self.list_frame, width=40, yscrollcommand=self.list_scrollbar.set, selectmode="extended")
+        self.list_box = Widgets.create_listbox(self.list_frame, width=40, yscrollcommand=self.list_scrollbar.set, selectmode="extended", activestyle="none")
 
         self.list_box.bind("<Double-Button>", self.view)
 
@@ -47,7 +47,7 @@ class Master:
         self.view_button = Widgets.create_button(self.root, text="View", command=self.view)
         self.view_button.place(y=self.frame_y + 90, x=90)
 
-        self.edit_button = Widgets.create_button(self.root, text="Edit", command=self.open_editor)
+        self.edit_button = Widgets.create_button(self.root, text="Edit", command=self.open_editmenu)
         self.edit_button.place(y=self.frame_y + 90, x=165)
 
         self.delete_button = Widgets.create_button(self.root, text="Delete", command=self.delete)
@@ -61,13 +61,13 @@ class Master:
     def import_file(self):
         file = self.ask_import_file()
 
-        (_, ext) = splitext(file)
+        if not file or not Helper.file_exists(file):
+            return
+
+        (file_name, ext) = splitext(file)
 
         if ext != ".txt":
             Helper.show_error("Currently only \".txt\" file extensions are supported.", self.root)
-            return
-
-        if not file or not Helper.file_exists(file):
             return
 
         if not Helper.add_notepad(None, file, imported=True):
@@ -82,7 +82,7 @@ class Master:
     def ask_import_file():
         return filedialog.askopenfilename(initialdir="/", title="Select file", filetypes=(("Files", "*"), ("All files", "*.*")))
 
-    def open_editor(self):
+    def open_editmenu(self):
         selected = self.list_box.curselection()
 
         if len(selected) > 1:
@@ -101,7 +101,7 @@ class Master:
 
         try:
             if not Helper.file_exists(path):
-                path = Helper.get_notepad_path(name, imported=True)
+                path = Helper.get_notepad_path_raw(name, imported=True)
                 if not Helper.file_exists(path):
                     Helper.show_error("The notepad you selected does not exist.", self.root)
                     return
@@ -109,7 +109,7 @@ class Master:
             Helper.show_error("The notepad you selected does not exist anymore.", self.root)
             return
 
-        Editor(name, path, self.root)
+        EditMenu(name, path, self.root, self.list_box)
 
     def view(self, *_):
         selected = self.list_box.curselection()
@@ -179,33 +179,27 @@ class Master:
                     self.list_box.insert("end", view)
 
     def delete_all(self):
-        try:
-            notepads = []
-            for notepad in Helper.get_notepads():
-                index = list(self.list_box.get(0, "end")).index(notepad.removesuffix(".txt"))
-                notepads.append(index)
-            self.delete_notepads(notepads)
-        except OSError:
-            Helper.show_error("I do not have permissions to delete files. Please run me as an administrator.", self.root)
+        all_names = self.list_box.get(0, "end")
+        all_indexes = tuple(range(len(all_names)))
+
+        if len(all_indexes) == 0:
+            Helper.show_error("Please select a notepad.", self.root)
             return
 
-        self.views = []
-        self.list_box.delete(0, "end")
+        self.delete_notepads(all_indexes)
 
-    def delete_notepads(self, notes: list[int]):
+    def delete_notepads(self, notes: tuple[int], remove: bool = True, cb: callable = None):
         _names = [self.list_box.get(n) for n in notes]
         names = ", ".join(_names)
 
         wording = f"these notepads:\n{names}" if len(notes) > 1 else f"\"{names}\""
 
         Helper.confirmation("Deletion", f"Are you sure you want to delete {wording}?",
-                            lambda: execute(notes), self.root)
+                            lambda: execute(reversed(_names), remove), self.root)
 
-        def execute(selected):
-            selected = reversed(selected)
-            for index in selected:
-                name = self.list_box.get(index)
-                delete = Helper.delete_notepad(name, None)
+        def execute(selected, remove_list):
+            for name in selected:
+                delete = Helper.delete_notepad(name)
 
                 if not delete:
                     Helper.show_error("That notepad does not exist.", self.root)
@@ -214,8 +208,11 @@ class Master:
                     Helper.show_error("I do not have permissions to delete files. Please run me as an administrator.", self.root)
                     return
 
-                self.list_box.delete(index)
+                if remove_list:
+                    self.list_box.delete(list(self.list_box.get(0, "end")).index(name))
                 self.remove_view(name)
+            if type(cb) == callable:
+                cb()
 
     def set_notepads(self):
         notepads: list[str] = Helper.get_notepads()
