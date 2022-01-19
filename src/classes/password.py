@@ -90,7 +90,8 @@ class Password:
     def enter_pass(self):
         self.top.withdraw()
 
-        top = Helper.setup_top(self.root, title="Set Password")
+        # funni number
+        top = Helper.setup_top(self.root, title="Set Password", geometry="420x69")
 
         self.root.eval("tk::PlaceWindow %s center" % top)
 
@@ -106,6 +107,6 @@ class Password:
             self.set_pass(top_entry.get(), top)
             self.top.deiconify()
 
-        Button(top, text="Confirm", command=call_back).pack()
+        Widgets.create_button(top, text="Confirm", command=call_back).pack()
 
         return var
