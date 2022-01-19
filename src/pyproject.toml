@@ -1,0 +1,3 @@
+[tool.doculog]
+changelog = "CHANGELOG"
+project = "BinaryPFP"
