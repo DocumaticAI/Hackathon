@@ -1,11 +1,6 @@
 {
   "name": "one-story-one-song",
   "version": "0.1.0",
-  "contributors": [
-    "Stephen Haney<stephen.haney@gmail.com>",
-    "Suyash Joshi<suyash@suyashjoshi.com>",
-    "Devin Lane<devin.c.lane@gmail.com>"
-  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
