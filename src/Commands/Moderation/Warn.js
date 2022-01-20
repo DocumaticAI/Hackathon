@@ -1,9 +1,11 @@
-const { confirm } = require('../../Structures/Utils');
+const { getRandomString, confirm } = require('../../Structures/Utils');
+const Warning = require('../../Models/Warning');
+const { time } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-	name: 'kick',
-	description: 'Kick a member.',
+	name: 'warn',
+	description: 'Warn someone.',
 	category: 'Moderation',
 	options: [
 		{
@@ -14,30 +16,19 @@ module.exports = {
 		},
 		{
 			name: 'reason',
-			description: 'Specify reason for kick',
+			description: 'Specify reason for warn',
 			required: true,
 			type: 'STRING'
 		}
 	],
-	permissions: 'KICK_MEMBERS',
-	async run({ interaction, bot, guild }) {
-		const user = interaction.options.getMember('user');
+	permissions: 'MODERATE_MEMBERS',
+	async run({ interaction, options, bot, guild }) {
+		const member = interaction.options.getMember('user');
 		const reason = interaction.options.getString('reason');
 
-		if (!user.kickable)
+		if (member.id === interaction.user.id)
 			return interaction.reply({
-				embeds: [
-					new MessageEmbed()
-						.setColor('RED')
-						.setDescription(`${bot.config.emotes.fail} I don't have permissions to kick ${user}.`)
-				]
-			});
-
-		if (user.id === interaction.user.id)
-			return interaction.reply({
-				embeds: [
-					new MessageEmbed().setColor('RED').setDescription(`${bot.config.emotes.fail} You cannot kick yourself.`)
-				]
+				embeds: [new MessageEmbed().setColor('RED').setDescription(`You cannot warn yourself.`)]
 			});
 
 		const confirmation = await confirm(
@@ -45,24 +36,33 @@ module.exports = {
 			new MessageEmbed()
 				.setTitle('Pending Conformation')
 				.setColor('BLURPLE')
-				.setDescription(`Are you sure you want to kick ${user} for reason: \`${reason}\`?`)
+				.setDescription(`Are you sure you want to warn ${member} for reason: \`${reason}\`?`)
 				.setFooter({ text: 'You have 60 seconds.' })
 		);
 
 		if (confirmation.proceed) {
+			const warnID = getRandomString(5);
+			await new Warning({
+				GuildID: interaction.guild.id,
+				WarnID: warnID,
+				UserID: member.id,
+				Reason: reason,
+				Moderator: interaction.user.id
+			}).save();
 			const embed = new MessageEmbed()
 				.setColor(bot.config.colors.green)
-				.setDescription(`${bot.config.emotes.success} **${member.user.tag}** was kicked for \`${reason}\`.`);
+				.setDescription(`${bot.config.emotes.success} **${member.user.tag}** was warned for \`${reason}\`.`);
 
 			try {
-				await user.send({
+				await member.send({
 					embeds: [
 						new MessageEmbed()
-							.setTitle('You were kicked')
+							.setTitle('You were warned')
 							.setColor('BLURPLE')
 							.addField('Reason', reason, false)
-							.addField('Guild', interaction.guild.name, false)
+							.addField('Warn ID', warnID, false)
 							.addField('Date', time(new Date(), 'F'), false) // TODO: add date to the other DMs
+							.addField('Guild', interaction.guild.name, false)
 					]
 				});
 			} catch (err) {
@@ -70,18 +70,16 @@ module.exports = {
 					text: `I was not able to DM inform them`
 				});
 			}
-			await confirmation.i.update({
+			return await confirmation.i.update({
 				embeds: [embed],
 				components: []
 			});
-
-			await user.kick({ reason });
 		}
 
 		const embed = new MessageEmbed()
 			.setTitle('Process Cancelled')
 			.setColor('BLURPLE')
-			.setDescription(`${user} was not kicked.`);
+			.setDescription(`${member} was not warned.`);
 
 		if (confirmation.reason) embed.setFooter({ text: confirmation.reason });
 

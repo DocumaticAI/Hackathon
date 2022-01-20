@@ -7,24 +7,23 @@ module.exports = {
 		const command = bot.commands.get(interaction.commandName);
 		if (!command) return;
 
-		try {
-			await command.run({ interaction, bot, options: interaction.options });
-		} catch (err) {
-			console.log(err);
-
-			await interaction[
-				interaction.deferred
-					? 'editReply'
-					: interaction.replied
-					? 'followUp'
-					: 'reply'
-			]({
+		if (command.permission && !interaction.member.permissions.has(command.permission))
+			return await interaction.reply({
 				embeds: [
 					new MessageEmbed()
 						.setColor('RED')
-						.setDescription(err.message || 'Unexpected error'),
-				],
+						.setDescription(`${bot.config.emotes.fail} You require the \`${command.permission}\` to run this command.`)
+				]
+			});
+
+		try {
+			await command.run({ interaction, bot, options: interaction.options, guild: interaction.guild });
+		} catch (err) {
+			console.log(err);
+
+			await interaction[interaction.deferred ? 'editReply' : interaction.replied ? 'followUp' : 'reply']({
+				embeds: [new MessageEmbed().setColor('RED').setDescription(err.message || 'Unexpected error')]
 			});
 		}
-	},
+	}
 };
