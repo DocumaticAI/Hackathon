@@ -22,7 +22,7 @@ module.exports = {
 		}
 	],
 	permissions: 'MODERATE_MEMBERS',
-	async run({ interaction, options, bot, guild }) {
+	async run({ interaction, bot }) {
 		const member = interaction.options.getMember('user');
 		const reason = interaction.options.getString('reason');
 
@@ -61,7 +61,7 @@ module.exports = {
 							.setColor('BLURPLE')
 							.addField('Reason', reason, false)
 							.addField('Warn ID', warnID, false)
-							.addField('Date', time(new Date(), 'F'), false) // TODO: add date to the other DMs
+							.addField('Date', time(new Date(), 'F'), false)
 							.addField('Guild', interaction.guild.name, false)
 					]
 				});

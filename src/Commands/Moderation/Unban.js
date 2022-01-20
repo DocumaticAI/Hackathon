@@ -14,7 +14,7 @@ module.exports = {
 			type: 'STRING'
 		}
 	],
-	async run({ interaction, bot, guild }) {
+	async run({ interaction, bot }) {
 		const id = interaction.options.getString('id');
 		if (!interaction.member.permissions.has('BAN_MEMBERS'))
 			return await interaction.reply({
@@ -53,7 +53,6 @@ module.exports = {
 				components: []
 			});
 			await interaction.guild.members.unban(id);
-			// sure
 		}
 
 		const embed = new MessageEmbed()

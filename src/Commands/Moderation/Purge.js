@@ -14,9 +14,12 @@ module.exports = {
 			type: 'NUMBER'
 		}
 	],
-	async run({ interaction, options, bot, guild }) {
+	async run({ interaction, bot }) {
 		let messages = interaction.options.getNumber('messages');
-		if (messages > 100) messages = 100;
+		if (messages > 100 || messages < 1)
+			return await interaction.reply(
+				'Please specify a number from 1 - 100' //We we're going to do so you could have more than 100 messages but not enough time...
+			);
 		const fetch = await interaction.channel.messages.fetch({ limit: messages });
 		const deletedMessages = await interaction.channel.bulkDelete(fetch, true);
 

@@ -3,37 +3,26 @@ module.exports = {
 	name: 'serverinfo',
 	description: 'Displays various information about server',
 	category: 'Utility',
-	async run({ interaction, bot }) {
+	async run({ interaction, bot, guild }) {
+		const owner = await guild.fetchOwner();
+		const channels = await guild.channels.fetch();
 		await interaction.reply({
 			embeds: [
 				new MessageEmbed()
 					.setColor('BLURPLE')
 					.setAuthor({
-						name: interaction.guild.name,
-						iconURL:
-							interaction.guild.iconURL() ||
-							'https://i.pinimg.com/736x/35/79/3b/35793b67607923a68d813a72185284fe.jpg',
+						name: guild.name,
+						iconURL: guild.iconURL() || 'https://i.pinimg.com/736x/35/79/3b/35793b67607923a68d813a72185284fe.jpg'
 					})
-					.setThumbnail(
-						interaction.guild.iconURL() ||
-							'https://i.pinimg.com/736x/35/79/3b/35793b67607923a68d813a72185284fe.jpg'
-					)
-					.addField(
-						'Server Creation',
-						`<t:${Math.round(interaction.guild.createdTimestamp / 1000)}:f>`,
-						false
-					)
-					.addField('Owner', `${interaction.guild.fetchOwner}`, false)
-					.addField('Total Members', `${interaction.guild.memberCount}`, false)
-					.addField(
-						'Total Channels',
-						`${interaction.guild.channels.fetch()}`,
-						false
-					)
+					.setThumbnail(guild.iconURL() || 'https://i.pinimg.com/736x/35/79/3b/35793b67607923a68d813a72185284fe.jpg')
+					.addField('Server Creation', `<t:${Math.round(guild.createdTimestamp / 1000)}:f>`, false)
+					.addField('Owner', `${owner}`, false)
+					.addField('Total Members', `${guild.memberCount}`, false)
+					.addField('Total Channels', `${channels.size}`, false)
 					.setFooter({
-						text: `Guild ID: ${interaction.guild.id}`,
-					}),
-			],
+						text: `Guild ID: ${guild.id}`
+					})
+			]
 		});
-	},
+	}
 };

@@ -8,7 +8,7 @@
 		"run": "node ."
 	},
 	"repository": "https://github.com/Jakob5358/Hackathon.git",
-	"author": "Jakob & Mono",
+	"author": "Jakob & Monochromish",
 	"license": "MIT",
 	"dependencies": {
 		"consola": "^2.15.3",
@@ -16,6 +16,7 @@
 		"dotenv": "^11.0.0",
 		"glob": "^7.2.0",
 		"mathjs": "^10.0.2",
-		"mongoose": "^6.1.6"
+		"mongoose": "^6.1.6",
+		"ms": "^2.1.3"
 	}
 }
