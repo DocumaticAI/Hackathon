@@ -1,0 +1,16 @@
+{
+  "name": "messages-tracker",
+  "version": "1.0.0",
+  "description": "A discord bot for tracking messages with automated leaderboard , etc",
+  "main": "src/bot.js",
+  "scripts": {
+    "start": "node src/bot.js"
+  },
+  "author": "Sahil",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "discord.js": "^13.6.0",
+    "mongoose": "^5.12.13"
+  }
+}
