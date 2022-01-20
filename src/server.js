@@ -77,7 +77,7 @@ app.use((req,res,next)=> {
 passport.use(
         new LocalStrategy({usernameField: 'email'},(email,password,done)=>{
             //match user
-            userM.findOne({email:"ytwhitecluegaming@gmail.com"})
+            userM.findOne({email:email})
             .then((user)=>{
                 if(!user){
                     return done(null,false,{message:'email not registered'});
@@ -85,22 +85,6 @@ passport.use(
                     }
                 
                 if(password !== user.password) return done(null,false,{message: 'password incorrect'});
-                
-                /*if(password !== user.password) {
-                    return done(null,false,{message: 'password incorrect'});
-                } else {
-                    return done(null,user);
-                }*/
-                //math passwords
-
-               /*bcrypt.compare(password,user.password,(err,isMatch)=>{
-                    if(err) throw err;
-                    if(isMatch){
-                        return done(null,user);
-                    } else{
-                        return done(null,false,{message: 'password incorrect'});
-                    }
-                })*/
                 
                 return done(null,user);
                 
@@ -149,7 +133,7 @@ const server = app.listen(1477,
     
     
 
-mongoose.connect("mongodb+srv://host:host@cluster0.ajsam.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+mongoose.connect('', {
 
         useNewUrlParser: true,
 
@@ -217,12 +201,6 @@ app.post('/register', async (req,res,next) => {
     const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
 
-// These id's and secrets should come from .env file.
-const CLIENT_ID = '540903766360-9qbdttjl3soflj6830gqevqn3f67dqm8.apps.googleusercontent.com';
-const CLEINT_SECRET = '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';
-const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
-const REFRESH_TOKEN = '1//04EfgiMBrxucKCgYIARAAGAQSNwF-L9Ir6YV2bM-h1K74enwH14Tfb-XV8RB_BNG1thqn3IBm6qUH4Pz4QsI7PRN-6mCZDPcYRY4';
-
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
   CLEINT_SECRET,
@@ -238,7 +216,7 @@ async function sendMail() {
       service: 'gmail',
       auth: {
         type: 'OAuth2',
-        user: 'chatcordapp@gmail.com',
+        user: '',
         clientId: CLIENT_ID,
         clientSecret: CLEINT_SECRET,
         refreshToken: REFRESH_TOKEN,
@@ -247,7 +225,7 @@ async function sendMail() {
     });
 
     const mailOptions = {
-      from: 'chatcordapp@gmail.com',
+      from: '',
       to: email,
       subject: 'Rival Chat Email Verification',
       text: `verify your email - https://chat.only-fans.club/verify?token=${verifyCode}`,
@@ -361,35 +339,6 @@ app.post('/login', async (req,res,next) => {
     failureFlash : true
 })(req,res,next)
     
-    
-    
-    /*    
-        await new userM({
-
-		id: ("1"+makeID(19)),
-            
-        token: token,
-    
-        username: "WhiteClue",
-
-        date: Date.now(),
-
-        guilds: [],
-    
-        email: "ytwhitecluegaming@gmail.com",
-    
-        avatar: "https://cdn.discordapp.com/avatars/761230002922455091/f87948b9edbc5b768565938d0209f142.png",
-    
-        password: "whiteclue@123",
-    
-        badges: [],
-    
-        status: "OFFLINE",
-    
-        lastSeenMsgs: {}
-
-	}).save()
-        */
      
 })
 
