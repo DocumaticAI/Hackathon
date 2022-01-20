@@ -4,13 +4,14 @@ module.exports = {
 	name: 'lift-lockdown',
 	description: 'Lift a server lockdown.',
 	category: 'Moderation',
+	permissions: 'MANAGE_CHANNELS',
 	async run({ interaction, bot, guild }) {
-		await guild.roles.everyone.setPermissions(role.permissions.add('SEND_MESSAGES'));
+		await guild.roles.everyone.setPermissions(guild.roles.everyone.permissions.add('SEND_MESSAGES'));
 
 		await interaction.reply({
 			embeds: [
 				new MessageEmbed()
-					.setColor(bot.config.colors.green) //Jacobin read
+					.setColor(bot.config.colors.green)
 					.setDescription(`${bot.config.emotes.success} Lockdown lifted.`)
 			]
 		});

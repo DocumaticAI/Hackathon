@@ -1,5 +1,6 @@
 const { confirm } = require('../../Structures/Utils');
 const { MessageEmbed } = require('discord.js');
+const ms = require('ms');
 
 module.exports = {
 	name: 'timeout',
@@ -20,13 +21,13 @@ module.exports = {
 		},
 		{
 			name: 'reason',
-			description: 'Specify reason for ban',
+			description: 'Specify reason for timeout',
 			required: true,
 			type: 'STRING'
 		}
 	],
 	permissions: 'MODERATE_MEMBERS',
-	async run({ interaction, options, bot, guild }) {
+	async run({ interaction, bot }) {
 		const member = interaction.options.getMember('user', true);
 		const duration = interaction.options.getString('duration', true);
 		const reason = interaction.options.getString('reason', true);
@@ -48,7 +49,7 @@ module.exports = {
 			new MessageEmbed()
 				.setTitle('Pending Conformation')
 				.setColor('BLURPLE')
-				.setDescription(`Are you sure you want to ban ${member} for reason: \`${reason}\`?`)
+				.setDescription(`Are you sure you want to timeout ${member} for reason: \`${reason}\`?`)
 				.setFooter({ text: 'You have 60 seconds.' })
 		);
 
@@ -68,7 +69,7 @@ module.exports = {
 							.addField('Reason', reason, false)
 							.addField('Guild', interaction.guild.name, false)
 							.addField('Duration', ms(ms(duration), { long: true }))
-							.addField('Date', time(new Date(), 'F'), false) // TODO: add date to the other DMs
+							.addField('Date', time(new Date(), 'F'), false)
 					]
 				});
 			} catch (err) {
@@ -77,12 +78,13 @@ module.exports = {
 				});
 			}
 
-			await confirmation.i.update({
+			return await confirmation.i.update({
 				embeds: [
 					new MessageEmbed()
 						.setColor(bot.config.colors.green)
-						.setDescription(`${bot.config.emotes.success} **${member.id}** was timedout successfully.`)
-				]
+						.setDescription(`${bot.config.emotes.success} **${member}** was timedout successfully.`)
+				],
+				components: []
 			});
 		}
 

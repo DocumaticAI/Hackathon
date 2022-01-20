@@ -35,7 +35,7 @@ module.exports = {
 				proceed: false,
 				reason: 'Reason: Inactivity Timeout',
 				i
-			}; //brb ok
+			};
 
 		if (i.customId === 'proceed')
 			return {

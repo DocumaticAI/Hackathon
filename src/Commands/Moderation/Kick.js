@@ -20,7 +20,7 @@ module.exports = {
 		}
 	],
 	permissions: 'KICK_MEMBERS',
-	async run({ interaction, bot, guild }) {
+	async run({ interaction, bot }) {
 		const user = interaction.options.getMember('user');
 		const reason = interaction.options.getString('reason');
 
@@ -62,7 +62,7 @@ module.exports = {
 							.setColor('BLURPLE')
 							.addField('Reason', reason, false)
 							.addField('Guild', interaction.guild.name, false)
-							.addField('Date', time(new Date(), 'F'), false) // TODO: add date to the other DMs
+							.addField('Date', time(new Date(), 'F'), false)
 					]
 				});
 			} catch (err) {
