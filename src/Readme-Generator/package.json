@@ -3,7 +3,6 @@
   "private": true,
   "description": "A simple react app to generate beautiful github profile readme in md(markdown)",
   "version": "1.2.0",
-  "author": "Van.sh07 <https://vanshdhillon.ml>",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
