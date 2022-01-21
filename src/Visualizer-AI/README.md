@@ -1,7 +1,7 @@
 ## Visualizer
 
 This project is developed with React to help people to view algorithmic processes intuitively and entertainingly. <br/>
-You may visit the page at <a href="https://visualizer.gq">Visualizer.gq</a> with your Browser.
+You may visit the page at <a href="https://jasonfenggit.github.io/Visualizer/">jasonfenggit.github.io/Visualizer/</a> with Chrome.
 
 
 ## Algorithms Included
@@ -27,7 +27,12 @@ You may visit the page at <a href="https://visualizer.gq">Visualizer.gq</a> with
 
 ## How To Use
 
-Open the <a href="https://visualizer.gq">website</a> in Browser and follow the instructions to start visualizing algorithms!
+Open the <a href="https://jasonfenggit.github.io/Visualizer/">website</a> in Chrome and follow the instructions to start visualizing algorithms!
+
+
+## How To Contribute
+
+You may find me through <a href="mailto:jasonfen@usc.edu">email</a> with any comments or ideas and fork this project!
 
 ## Future Expectations
 - Implement and complete descriptions & tutorials of different algorithms
