@@ -1,8 +1,7 @@
 const { solveQuartic, eq, unitVector, Point, Vector } = require("./math.js");
 
 class Sphere {
-  constructor(middle, radius){
-    this.middle = new Point(...middle);
+  constructor(radius){
     this.radius = radius;
   }
 
@@ -11,7 +10,21 @@ class Sphere {
     // formula from
     // https://math.stackexchange.com/questions/1939423/calculate-if-vector-intersects-sphere
 
-    const Q = P.sub(this.middle);
+    /** /
+            P = P.sub(this.middle);
+
+            const Px = P.x * Math.cos(this.yaw) - P.z * Math.sin(this.yaw);
+            P.z = P.x * Math.sin(this.yaw) + P.z * Math.cos(this.yaw);
+            P.x = Px;
+
+            const Ux = U.x * Math.cos(this.yaw) - U.z * Math.sin(this.yaw);
+            U.z = U.x * Math.sin(this.yaw) + U.z * Math.cos(this.yaw);
+            U.x = Ux;
+    /**/
+
+    const Q = P.sub(new Point(0, 0, 0));
+    //const Q = P.sub(this.middle);
+
     const a = U.dot(U);
     const b = 2 * U.dot(Q);
     const c = Q.dot(Q) - this.radius * this.radius;
@@ -27,19 +40,36 @@ class Sphere {
   }
 
   angle(L, S){
+
+    /** /
+    //return 3;
+
+            L = L.sub(this.middle);
+            S = S.sub(this.middle);
+
+            const Lx = L.x * Math.cos(this.yaw) - L.z * Math.sin(this.yaw);
+            L.z = L.x * Math.sin(this.yaw) + L.z * Math.cos(this.yaw);
+            L.x = Lx;
+
+            const Sx = S.x * Math.cos(this.yaw) - S.z * Math.sin(this.yaw);
+            S.z = S.x * Math.sin(this.yaw) + S.z * Math.cos(this.yaw);
+            S.x = Sx;
+
+    /**/
+
     const V = unitVector(L.sub(S));
-    const U = unitVector(this.middle.sub(S));
+    const U = unitVector(new Point(0, 0, 0).sub(S));
+    //const U = unitVector(new Point(0, 0, 0).sub(S));
     const theta = Math.acos(V.dot(U) / (V.a * U.a));
     return theta;
   }
 }
 
 class Donut {
-  constructor(r, R, middle){
+  constructor(r, R){
 
     this.r = r;
     this.R = R;
-    this.middle = new Point(...middle);
 
     //this.yaw = Math.PI * 2 * 0.01;
     this.yaw = 0;
@@ -50,6 +80,7 @@ class Donut {
     // formula from
     // my head
 
+    /*
     P = P.sub(this.middle);
 
     const Px = P.x * Math.cos(this.yaw) - P.z * Math.sin(this.yaw);
@@ -59,6 +90,7 @@ class Donut {
     const Ux = U.x * Math.cos(this.yaw) - U.z * Math.sin(this.yaw);
     U.z = U.x * Math.sin(this.yaw) + U.z * Math.cos(this.yaw);
     U.x = Ux;
+    */
 
     const r = this.r;
     const R = this.R;
@@ -138,6 +170,7 @@ class Donut {
 
   angle(L, S){
 
+    /*
     L = L.sub(this.middle);
     S = S.sub(this.middle);
 
@@ -148,6 +181,7 @@ class Donut {
     const Sx = S.x * Math.cos(this.yaw) - S.z * Math.sin(this.yaw);
     S.z = S.x * Math.sin(this.yaw) + S.z * Math.cos(this.yaw);
     S.x = Sx;
+    */
 
     const Z = new Point(0, 0, 0);
     const P = new Point(S.x, S.y, 0);

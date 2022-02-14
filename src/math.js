@@ -60,6 +60,14 @@ class Vector {
       this.z - vector.z
     );
   }
+
+  add(vector){
+    return new Vector(
+      this.x + vector.x,
+      this.y + vector.y,
+      this.z + vector.z
+    );
+  }
 }
 
 function unitVector(vector){
@@ -105,9 +113,9 @@ function solveQuartic(a, b, c, d, e){
   const y = - (5 * alpha) / 6 + (U ? (U - P / (3 * U)) : (- Math.cbrt(Q)));
   const W = Math.sqrt(alpha + 2 * y);
 
-  /*if(W == 0){
+  /** /if(W == 0){
     console.log("== Here W becomes 0! Should not happen! ==", alpha, U, P);
-  }*/
+  }/**/
 
   const x1 = - b / (4 * a) + (
     + W + Math.sqrt(- (3 * alpha + 2 * y + (2 * beta) / W))
