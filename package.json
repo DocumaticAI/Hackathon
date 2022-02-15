@@ -1,0 +1,22 @@
+{
+  "name": "hackathon",
+  "version": "0.4.0",
+  "description": "### Table Of Content 📃",
+  "main": "src/index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gXLg/Hackathon.git"
+  },
+  "author": "gXLg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gXLg/Hackathon/issues"
+  },
+  "homepage": "https://github.com/gXLg/Hackathon#readme"
+}
