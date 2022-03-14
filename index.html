@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rush!</title>
+  <link rel="stylesheet" href="src/styles/index.css">
+  <script src="src/vendors/three.min.js"></script>
+  <script src="src/vendors/howler.min.js"></script>
+  
+  <script src="src/scripts/audio-manager.js"></script>
+  <script src="src/scripts/lerp.js"></script>
+  <script src="src/scripts/game.js"></script>
+  <script src="src/scripts/main.js"></script>
+</head>
+<body>
+  <div id="info">
+    <div id="title">Captain's log</div>
+    <div class="divider"></div>
+    <div id="score-row">Score: <div id="score"></div></div>
+    <div id="distance-row">Distance: <div id="distance"></div></div>
+    <div class="divider"></div>
+    <div>Ship's Integrity:</div>
+    <input id="health" type="range" min="0" max="100" disabled>
+  </div>
+
+  <div id="intro-panel">
+    <div id="intro-column">
+      <div id="intro-title">Rush!</div>
+      <button id="start-button">Start</button>
+    </div>
+  </div>
+
+  <div id="game-over-panel">
+    <div id="game-over-column">
+      <div id="game-over-title">Game over!</div>
+      <div id="game-over-score-row">Score: <div id="game-over-score"></div></div>
+      <div id="game-over-distance-row">Distance: <div id="game-over-distance"></div></div>
+      <button id="replay-button">Replay</button>
+    </div>
+  </div>
+</body>
+</html>
