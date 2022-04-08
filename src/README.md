@@ -17,3 +17,5 @@ To run, use `node .`.
 * `math.js`: functions needed for calculations
 * `body.js`: shapes and calculations of light reflection and tracings
 * `index.js`: main file, creating scene, object and rendering happens here
+
+(Moved to own repository)
