@@ -2,7 +2,7 @@ function setupAudio() {
 
   // background music
   const musicAudio = new Howl({
-    src: ['./assets/music.mp3'],
+    src: ['src/assets/music.mp3'],
     autoplay: true,
     loop: true,
   });
